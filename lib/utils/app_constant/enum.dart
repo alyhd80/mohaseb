@@ -1,0 +1,5 @@
+
+enum AppLanguage{
+  farsi,
+  english,
+}
