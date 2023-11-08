@@ -43,8 +43,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Text("ورود",
                       style: Theme.of(context).textTheme.headline2!.copyWith(
                           fontSize:
-                              size.width * 0.07 > 30 ? 30 : size.width * 0.07,
-                          fontWeight: FontWeight.w700,
+                              size.width * 0.095 > 40 ? 40 : size.width * 0.095,
+                          fontWeight: FontWeight.w500,
                           color: primaryColor)),
                   SizedBox(
                     height: size.height * 0.01,
@@ -52,9 +52,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Text(
                       "لطفا برای ورود به حساب کاربری خود، شماره موبایل خود را وارد کنید.",
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                       style: Theme.of(context).textTheme.headline2!.copyWith(
                           fontSize:
-                              size.width * 0.04 > 14 ? 14 : size.width * 0.04,
+                              size.width * 0.045 > 16 ? 16 : size.width * 0.045,
                           fontWeight: FontWeight.w500,
                           color: greyFoundation06)),
                   SizedBox(
@@ -81,6 +82,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               textInputType: TextInputType.number,
                               textAlign: TextAlign.right,
                               maxCharacter: 11,
+
                             ),
                           ),
                           SizedBox(
@@ -110,7 +112,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         backgroundColor: Colors.transparent,
                         title: "ورود با نام کاربری و رمز عبور",
                         fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w500,
                         onTap: () {},
                       );
                     }),
@@ -181,6 +183,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   height: size.height * 0.06,
                   child: CustomButton(
                     onTap: () {
+                      FocusScope.of(context).unfocus();
+
                       viewModel.findNavigationPage(context, ref);
                       Future.delayed(Duration(milliseconds: 500), () async {
                         await Navigator.of(context).pushNamed(AppRout.verify,

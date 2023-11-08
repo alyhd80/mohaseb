@@ -19,6 +19,7 @@ class VerifyPineCodeWidget extends StatelessWidget {
       child: PinCodeTextField(
         animationCurve: Curves.easeIn,
         onChanged: onChange!,
+        cursorColor: Colors.black,
         pinTheme: PinTheme(
           shape: PinCodeFieldShape.box,
           borderRadius: BorderRadius.circular(16),

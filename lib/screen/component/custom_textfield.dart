@@ -15,6 +15,8 @@ class CustomTextField extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxCharacter;
   final Function(String)? onChange, onSubmittedEnd;
+  final String? Function(String? value)? validator;
+
   final Color? titleColor,hintColor;
   final TextInputAction? textInputAction;
 
@@ -35,6 +37,7 @@ class CustomTextField extends StatelessWidget {
     this.textInputAction,
     this.isSmartArticle,
     this.onSubmittedEnd, this.hintColor,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -42,6 +45,7 @@ class CustomTextField extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return TextFormField(
+
       onFieldSubmitted: onSubmittedEnd,
       onChanged: onChange ?? (string) {},
       obscureText: showPassword ?? false,
@@ -53,6 +57,7 @@ class CustomTextField extends StatelessWidget {
       enabled: isEnable,
       keyboardType:
       textInputType ?? const TextInputType.numberWithOptions(decimal: true),
+      // validator: validator,
       inputFormatters: <TextInputFormatter>[
         if (isSmartArticle == true) ...[
           NumberTextInputFormatter(

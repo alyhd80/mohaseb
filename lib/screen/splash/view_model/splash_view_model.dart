@@ -8,7 +8,7 @@ class SplashViewModel extends ChangeNotifier {
     WidgetRef ref,
   ) async {
     Future.delayed(Duration(seconds: 1), () {
-      Navigator.pushReplacementNamed(context, AppRout.login);
+      Navigator.pushNamedAndRemoveUntil(context, AppRout.login, (_) => false);
     });
   }
 }
