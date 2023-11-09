@@ -22,7 +22,7 @@ bool _isErrorValidation=false;
       _changeSizeHeight=true;
     }
 
-    print(_changeSizeHeight);
+    print("login "+_changeSizeHeight.toString());
     notifyListeners();
 
   }

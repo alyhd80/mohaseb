@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/l10n/l10.dart';
-import 'package:mohaseb/screen/splash/splash_page.dart';
+import 'package:mohaseb/route/AppRouter.dart';
 import 'package:mohaseb/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:mohaseb/utils/app_constant/route.dart';
+import 'package:auto_route/auto_route.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +14,7 @@ void main() {
 
   runApp(ProviderScope(child: const MyApp()));
 }
+final appRouter=AppRouter();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
 
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
 
         supportedLocales: L10n.all,
@@ -38,9 +39,19 @@ class MyApp extends StatelessWidget {
         ],
         theme: mobileLightThemeData(),
 
-        initialRoute: '/splash',
-        routes: AppRout.routes,
-        home:  SplashPage(),
+        routerConfig: appRouter.config(
+            deepLinkBuilder: (deepLink) {
+              if (deepLink.path.startsWith('/products')) {
+                // continute with the platfrom link
+                return deepLink;
+              } else {
+                return DeepLink.defaultPath;
+                // or DeepLink.path('/')
+                // or DeepLink([HomeRoute()])
+              }
+            }
+        ),
+
       ),
     );
   }

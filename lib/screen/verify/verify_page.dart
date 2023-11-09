@@ -10,15 +10,18 @@ import 'package:mohaseb/screen/verify/view_model/timer.dart';
 import 'package:mohaseb/screen/verify/view_model/verify_view_model.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
 
+import 'package:auto_route/auto_route.dart';
+
+@RoutePage(name: "verify")
 class VerifyPage extends ConsumerStatefulWidget {
-  const VerifyPage({super.key});
+  final String phoneNumber,token;
+  const VerifyPage({super.key,@pathParam required this.phoneNumber,@pathParam required this.token});
 
   @override
   ConsumerState<VerifyPage> createState() => _VerifyPageState();
 }
 
 class _VerifyPageState extends ConsumerState<VerifyPage> {
-  LoginDetailArguments? loginDetailArguments;
   late VerifyViewModel viewModel;
 
   @override
@@ -33,9 +36,7 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
 
   @override
   Widget build(BuildContext context) {
-    loginDetailArguments = ModalRoute.of(context)!.settings.arguments != null
-        ? ModalRoute.of(context)!.settings.arguments as LoginDetailArguments
-        : null;
+
 
     viewModel = ref.watch(verifyViewModelProvider);
 
@@ -85,7 +86,7 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                               color: borderColor1),
                           children: [
                             TextSpan(
-                              text: loginDetailArguments?.phoneNumber ?? "",
+                              text:  widget.phoneNumber??"",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline2!
@@ -234,11 +235,8 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                             onTap: () {
                               FocusScope.of(context).unfocus();
 
-                              viewModel.findNavigationPage(context, ref);
-                              Future.delayed(Duration(milliseconds: 500),
-                                  () async {
-                                Navigator.of(context).pop();
-                              });
+                              // viewModel.findNavigationPage(context, ref);
+                              context.router.pop();
                             },
                             title: "قبلی",
                             borderColor: Colors.white,

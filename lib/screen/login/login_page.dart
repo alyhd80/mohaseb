@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/data/local/arguments.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/screen/component/custom_buttom.dart';
 import 'package:mohaseb/screen/component/custom_textfield.dart';
 import 'package:mohaseb/screen/login/component/login_body.dart';
 import 'package:mohaseb/screen/login/view_model/login_view_model.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
 import 'package:mohaseb/utils/app_constant/route.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage(name: "login")
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
@@ -19,12 +22,6 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   late LoginViewModel viewModel;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +79,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               textInputType: TextInputType.number,
                               textAlign: TextAlign.right,
                               maxCharacter: 11,
-
                             ),
                           ),
                           SizedBox(
@@ -124,19 +120,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           Align(
             alignment: Alignment.topCenter,
             child: AnimatedContainer(
-                duration: Duration(milliseconds: 500),
-                width: size.width,
-                height: size.height *
-                    (viewModel.changeSizeHeight
-                        ? 1
-                        : MediaQuery.of(context).viewInsets.bottom != 0
-                            ? 0.1625
-                            : 0.25),
-                decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                  image: new AssetImage("assets/images/login_2.png"),
-                  fit: BoxFit.fill,
-                ))),
+              duration: Duration(milliseconds: 500),
+              width: size.width,
+              height: size.height *
+                  (viewModel.changeSizeHeight
+                      ? 1
+                      : MediaQuery.of(context).viewInsets.bottom != 0
+                          ? 0.1625
+                          : 0.25),
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(
+              //     image: AssetImage("assets/images/login_2.png"),
+              //     fit: BoxFit.fill,
+              //   ),
+              // ),
+             child: Image.asset(
+              "assets/images/login_2.png",
+              fit: BoxFit.fill,
+            ),
+            ),
           ),
           Align(
             alignment: Alignment.topCenter,
@@ -149,23 +151,36 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         : MediaQuery.of(context).viewInsets.bottom != 0
                             ? 0.125
                             : 0.1875),
-                decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                  image: new AssetImage("assets/images/login_1.png"),
+                // decoration: BoxDecoration(
+                //     image: DecorationImage(
+                //   image: AssetImage("assets/images/login_1.png"),
+                //   fit: BoxFit.fill,
+                // )),
+                child: Image.asset(
+                  "assets/images/login_1.png",
                   fit: BoxFit.fill,
-                ))),
+                )),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: AnimatedContainer(
                 duration: Duration(milliseconds: 500),
                 width: size.width,
-                height: size.height * (viewModel.changeSizeHeight ? 1 :MediaQuery.of(context).viewInsets.bottom != 0?0.15 : 0.25),
-                decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                  image: new AssetImage("assets/images/login_3.png"),
+                height: size.height *
+                    (viewModel.changeSizeHeight
+                        ? 1
+                        : MediaQuery.of(context).viewInsets.bottom != 0
+                            ? 0.15
+                            : 0.25),
+                // decoration: BoxDecoration(
+                //     image: DecorationImage(
+                //   image: AssetImage("assets/images/login_3.png"),
+                //   fit: BoxFit.fill,
+                // )),
+                child: Image.asset(
+                  "assets/images/login_3.png",
                   fit: BoxFit.fill,
-                ))),
+                )),
           ),
           Align(
             alignment: Alignment.bottomRight,
@@ -176,28 +191,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 duration: Duration(milliseconds: 500),
                 switchInCurve: Curves.ease,
                 switchOutCurve: Curves.ease,
+                child: viewModel.changeSizeHeight
+                    ? null
+                    : Container(
+                        key: Key(viewModel.changeSizeHeight ? "on" : "off"),
+                        width: size.width * 0.25,
+                        height: size.height * 0.06,
+                        child: CustomButton(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
 
-                child:viewModel.changeSizeHeight?null :Container(
-                  key: Key(viewModel.changeSizeHeight?"on":"off" ),
-                  width: size.width * 0.25,
-                  height: size.height * 0.06,
-                  child: CustomButton(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
+                            viewModel.findNavigationPage(context, ref);
+                            Future.delayed(Duration(milliseconds: 500),
+                                () async {
+                              await context.router.push(Verify(
+                                  phoneNumber: "09022783200", token: "test"));
+                              print("change");
 
-                      viewModel.findNavigationPage(context, ref);
-                      Future.delayed(Duration(milliseconds: 500), () async {
-                        await Navigator.of(context).pushNamed(AppRout.verify,
-                            arguments:
-                                LoginDetailArguments(phoneNumber: "09022783200"));
-                        viewModel.findNavigationPage(context, ref);
-                      });
-                    },
-                    title: "بعدی",
-                    borderColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                  ),
-                ),
+                              viewModel.findNavigationPage(context, ref);
+                            });
+                          },
+                          title: "بعدی",
+                          borderColor: Colors.white,
+                          backgroundColor: Colors.transparent,
+                        ),
+                      ),
               ),
             ),
           ),
