@@ -1,15 +1,11 @@
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mohaseb/data/local/arguments.dart';
-import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/screen/component/custom_buttom.dart';
 import 'package:mohaseb/screen/component/custom_textfield.dart';
-import 'package:mohaseb/screen/login/component/login_body.dart';
 import 'package:mohaseb/screen/login/view_model/login_view_model.dart';
+import 'package:mohaseb/service/show_toast.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
-import 'package:mohaseb/utils/app_constant/route.dart';
 import 'package:auto_route/auto_route.dart';
 
 @RoutePage(name: "login")
@@ -61,7 +57,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Container(
                     height: size.height * 0.075 < 45 ? 45 : size.height * 0.075,
                     decoration: BoxDecoration(
-                        border: Border.all(color: primaryColor, width: 2),
+                        border: Border.all(color:viewModel.isErrorValidation? redColor1: primaryColor, width: 2),
                         borderRadius: BorderRadius.circular(16)),
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -75,10 +71,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           Expanded(
                             child: CustomTextField(
                               hintTitle: "شماره موبایل",
-                              hintColor: primaryColor,
+                              hintColor:primaryColor,
+                              textEditingController: viewModel.numberTextEditingController,
                               textInputType: TextInputType.number,
                               textAlign: TextAlign.right,
                               maxCharacter: 11,
+                              onChange: (string){
+                                if(viewModel.isErrorValidation){
+                                  viewModel.isErrorValidation=false;
+                                }
+                              },
+
                             ),
                           ),
                           SizedBox(
@@ -89,7 +92,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             aspectRatio: 1,
                             child: Icon(
                               Boxicons.bx_phone,
-                              color: primaryColor,
+                              color:viewModel.isErrorValidation? redColor1: primaryColor,
                             ),
                           )
                         ],
@@ -109,7 +112,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         title: "ورود با نام کاربری و رمز عبور",
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        onTap: () {},
+                        onTap: () {
+                          showToast(
+                              context: context,
+                              title: "گوز",
+                              detail: "ابول طرح و نزده ",
+                              isSuccess: null);
+                        },
                       );
                     }),
                   ),
@@ -201,16 +210,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           onTap: () {
                             FocusScope.of(context).unfocus();
 
-                            viewModel.findNavigationPage(context, ref);
-                            Future.delayed(Duration(milliseconds: 500),
-                                () async {
-                              await context.router.push(Verify(
-                                  phoneNumber: "09022783200", token: "test"));
-                              print("change");
+                            if(viewModel.isLoading){
+                              showToast(context: context, title: "خطا", detail: "درخواست قبلی در حال اجرا می باشد", isSuccess: false);
+                              return;
+                            }
+                            viewModel.validation(context, ref);
 
-                              viewModel.findNavigationPage(context, ref);
-                            });
                           },
+                          isLoading: viewModel.isLoading,
                           title: "بعدی",
                           borderColor: Colors.white,
                           backgroundColor: Colors.transparent,

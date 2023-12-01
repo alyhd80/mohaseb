@@ -4,7 +4,7 @@ import 'package:mohaseb/utils/app_constant/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class VerifyPineCodeWidget extends StatelessWidget {
-  final TextEditingController? textEditingController;
+  final TextEditingController textEditingController;
   final Function(String)? onChange;
   final Color? borderColor;
 

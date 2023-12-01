@@ -1,56 +1,105 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mohaseb/application/data_provider.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
+import 'package:mohaseb/service/show_toast.dart';
 import 'package:mohaseb/utils/app_constant/route.dart';
+import 'package:mohaseb/utils/app_constant/strings.dart';
+import 'package:mohaseb/utils/form_validator.dart';
+import 'package:auto_route/auto_route.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  bool _changeSizeHeight=false;
-bool _isErrorValidation=false;
+  bool _changeSizeHeight = false;
+  bool _isErrorValidation = false;
+  TextEditingController numberTextEditingController = TextEditingController();
+  bool _isLoading = false;
 
+  bool get isLoading => _isLoading;
 
   bool get isErrorValidation => _isErrorValidation;
 
   bool get changeSizeHeight => _changeSizeHeight;
 
   Future<void> findNavigationPage(
-      BuildContext context,
-      WidgetRef ref,
-      ) async {
-
-    if(_changeSizeHeight){
-      _changeSizeHeight=false;
-    }else{
-      _changeSizeHeight=true;
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    if (_changeSizeHeight) {
+      _changeSizeHeight = false;
+    } else {
+      _changeSizeHeight = true;
     }
 
-    print("login "+_changeSizeHeight.toString());
+    print("login " + _changeSizeHeight.toString());
     notifyListeners();
-
   }
 
-
+  set isErrorValidation(bool value) {
+    _isErrorValidation = value;
+    notifyListeners();
+  }
 
   Future<void> validation(
-      BuildContext context,
-      WidgetRef ref,
-      ) async {
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    if (FormValidator().mobileValid(numberTextEditingController.text) != null) {
+      showToast(
+          context: context,
+          title: "شماره موبایل صحیح نمی باشد",
+          detail:
+              FormValidator().mobileValid(numberTextEditingController.text)!,
+          isSuccess: false);
 
-    if(_changeSizeHeight){
-      _changeSizeHeight=false;
-    }else{
-      _changeSizeHeight=true;
+      _isErrorValidation = true;
+      notifyListeners();
+    } else {
+      _isErrorValidation = false;
+      notifyListeners();
+      callApi(context, ref);
     }
-
-    print(_changeSizeHeight);
-    notifyListeners();
-
   }
 
+  Future<void> callApi(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    _isLoading = true;
+    notifyListeners();
 
+    final response = await ref.read(apiClientProvider).login(
+        context: context, map: {"phone": numberTextEditingController.text});
 
+    if (response.isSuccess) {
+      showToast(
+          context: context,
+          title: "موفقیت",
+          detail: "رمز یکبار مصرف با موفقیت برایتان ارسال شد",
+          isSuccess: true);
 
+      findNavigationPage(context, ref);
 
+      await Future.delayed(Duration(milliseconds: 500), () async {
+        await context.router
+            .push(Verify(phoneNumber: numberTextEditingController.text, token: response.data?.data?.otp?.signature??""));
+
+        findNavigationPage(context, ref);
+      });
+    } else {
+      showToast(
+          context: context,
+          title: "خطا",
+          detail: response.errorResponseModel != null &&
+                  response.errorResponseModel!.message!.isNotEmpty
+              ? response.errorResponseModel!.message!
+              : Strings.unknownError,
+          isSuccess: false);
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
 }
 
-var loginViewModelProvider =
-ChangeNotifierProvider.autoDispose<LoginViewModel>(
-        (ref) => LoginViewModel());
+var loginViewModelProvider = ChangeNotifierProvider.autoDispose<LoginViewModel>(
+    (ref) => LoginViewModel());

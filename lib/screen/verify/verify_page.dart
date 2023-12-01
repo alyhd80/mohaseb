@@ -115,8 +115,15 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                       height: size.height * 0.015,
                     ),
                     VerifyPineCodeWidget(
-                        textEditingController: TextEditingController(),
-                        onChange: (string) {}),
+                        textEditingController: viewModel.pinCodeTextEditingController,
+                        onChange: (string) {
+
+
+                          if(string.length==4){
+viewModel.callApiToVerify(context, ref, phoneNumber:widget. phoneNumber, token:widget. token);
+                          }
+
+                        }),
                     Consumer(builder: (context, ref, widget) {
                       var viewModelTimer = ref.watch(timerViewModelProvider);
 
@@ -239,6 +246,7 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                               context.router.pop();
                             },
                             title: "قبلی",
+                            isLoading: viewModel.isLoading,
                             borderColor: Colors.white,
                             backgroundColor: Colors.transparent,
                           ),

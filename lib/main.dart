@@ -7,6 +7,7 @@ import 'package:mohaseb/route/AppRouter.dart';
 import 'package:mohaseb/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:mohaseb/utils/app_constant/strings.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
 
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-
+title: Strings.appName,
         supportedLocales: L10n.all,
         locale:
              const Locale("en"),
