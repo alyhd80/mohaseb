@@ -77,6 +77,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               textAlign: TextAlign.right,
                               maxCharacter: 11,
                               onChange: (string){
+
+                                if(string.isEmpty){
+                                  viewModel.notifierViewModel();
+                                }else if(string.length==1){
+                                  viewModel.notifierViewModel();
+                                }
+
                                 if(viewModel.isErrorValidation){
                                   viewModel.isErrorValidation=false;
                                 }
@@ -113,11 +120,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         onTap: () {
-                          showToast(
-                              context: context,
-                              title: "گوز",
-                              detail: "ابول طرح و نزده ",
-                              isSuccess: null);
+viewModel.navigationToLoginWithPassword(context, ref);
                         },
                       );
                     }),
@@ -200,10 +203,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 duration: Duration(milliseconds: 500),
                 switchInCurve: Curves.ease,
                 switchOutCurve: Curves.ease,
-                child: viewModel.changeSizeHeight
+                child: (viewModel.changeSizeHeight||viewModel.numberTextEditingController.text.isEmpty)
                     ? null
                     : Container(
-                        key: Key(viewModel.changeSizeHeight ? "on" : "off"),
+                        key: Key( (viewModel.numberTextEditingController.text.isEmpty||viewModel.changeSizeHeight) ? "on" : "off"),
                         width: size.width * 0.25,
                         height: size.height * 0.06,
                         child: CustomButton(

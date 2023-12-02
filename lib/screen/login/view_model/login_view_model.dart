@@ -3,14 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/application/data_provider.dart';
 import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/service/show_toast.dart';
-import 'package:mohaseb/utils/app_constant/route.dart';
 import 'package:mohaseb/utils/app_constant/strings.dart';
 import 'package:mohaseb/utils/form_validator.dart';
 import 'package:auto_route/auto_route.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  bool _changeSizeHeight = false;
+  bool _changeSizeHeight = true;
   bool _isErrorValidation = false;
+
+  void notifierViewModel(){
+    notifyListeners();
+  }
+
   TextEditingController numberTextEditingController = TextEditingController();
   bool _isLoading = false;
 
@@ -98,6 +102,20 @@ class LoginViewModel extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  Future<void> navigationToLoginWithPassword(    BuildContext context,
+      WidgetRef ref,)async{
+    if(_isLoading==true){
+      return;
+    }
+    findNavigationPage(context, ref);
+
+    await Future.delayed(Duration(milliseconds: 500), () async {
+      await context.router
+          .push(Login_with_password());
+    });
+      findNavigationPage(context, ref);
   }
 }
 
