@@ -8,7 +8,7 @@ import 'package:mohaseb/utils/form_validator.dart';
 import 'package:auto_route/auto_route.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  bool _changeSizeHeight = true;
+  bool _changeSizeHeight = false;
   bool _isErrorValidation = false;
 
   void notifierViewModel(){

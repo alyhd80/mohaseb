@@ -120,7 +120,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         onTap: () {
-viewModel.navigationToLoginWithPassword(context, ref);
+ viewModel.navigationToLoginWithPassword(context, ref);
                         },
                       );
                     }),
