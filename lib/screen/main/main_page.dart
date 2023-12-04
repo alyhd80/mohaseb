@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/screen/main/component/bottom_sheet.dart';
+import 'package:mohaseb/screen/main/view_model/main_view_model.dart';
 
 @RoutePage(name: "main")
 class MainPage extends StatelessWidget {
@@ -12,6 +14,21 @@ class MainPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
+        Consumer(builder: (context,ref,widget){
+          MainViewModel viewModel=ref.watch(mainViewModelProvider);
+          return PageView(
+            reverse: true,
+            controller: viewModel.pageController,
+            children: [
+              Container(color: Colors.red,),
+              Container(color: Colors.blue,),
+              Container(color: Colors.black,),
+              Container(color: Colors.yellow,),
+
+            ],
+          );
+        }),
+
           Align(alignment: Alignment.bottomCenter,child: BottomSheetWidget(),)
         ],
       ),

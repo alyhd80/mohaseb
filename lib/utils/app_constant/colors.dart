@@ -4,6 +4,7 @@ Color primaryColor = const Color.fromRGBO(10, 62, 112, 1);
 Color darkBlue1 = const Color.fromRGBO(22, 131, 240, 1);
 Color darkBlue2 = const Color.fromRGBO(20, 113, 206,1);
 Color darkBlue3 = const Color.fromRGBO(3, 77, 141, 1);
+Color darkBlue4 = const Color.fromRGBO(19, 113, 205, 1);
 
 Color blueAppBar1 = const Color.fromRGBO(3, 114, 211, 1);
 Color blueAppBar2 = const Color.fromRGBO(32, 138, 232, 1);
@@ -29,6 +30,8 @@ Color greyColorBorder2 = const Color.fromRGBO(203, 205, 206, 1);
 
 Color greyLightColorBackground2 = const Color.fromRGBO(221, 219, 218, 1);
 Color greyDarkColorBackground2 = const Color.fromRGBO(150, 148, 146, 1);
+Color scaffoldColor = const Color.fromRGBO(246, 250, 254, 1);
+Color iconBasicColor = const Color.fromRGBO(94, 95, 96, 1);
 
 
 Color greyColorDivider = const Color.fromRGBO(236, 235, 234, 1);

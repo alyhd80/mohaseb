@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:mohaseb/route/AppRouter.gr.dart';
+import 'package:mohaseb/screen/login/component/login_body.dart';
 import 'package:mohaseb/screen/login_with_password/login_with_password_page.dart';
 import 'package:mohaseb/screen/main/main_page.dart';
 
@@ -12,6 +13,7 @@ class AppRouter extends $AppRouter {
           page: Login.page,
           path: "/login",
           transitionsBuilder: TransitionsBuilders.noTransition,
+// guards: [SplashGard()]
         ),
     CustomRoute(
       page: Verify.page,
@@ -31,19 +33,26 @@ class AppRouter extends $AppRouter {
       ];
 }
 
-class SecondGard extends AutoRouteGuard {
-  @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    print(resolver.route.args);
 
-    if (resolver.route.args != null) {
-      resolver.next(true);
-    } else {
-      ///web
-      router.back();
-
-      ///mobile
-      ///router.pop();
-    }
-  }
-}
+// class SplashGard extends AutoRouteGuard {
+//   @override
+//   void onNavigation(NavigationResolver resolver, StackRouter router) {
+//     print("rote --------------splash");
+//     print(
+//
+//         resolver.route.args);
+//
+// print(resolver.route.pathParams);
+// print(resolver.route.redirectedFrom);
+//     if (resolver.route.args != null) {
+//        // resolver.next(true);
+//     } else {
+//       ///web
+//        router;
+//        resolver.next(true);
+//       ///mobile
+//       ///router.pop();
+//     }
+//
+//   }
+// }

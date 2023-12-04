@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mohaseb/utils/app_constant/colors.dart';
 
 
 ThemeData mobileLightThemeData() {
   return ThemeData.light().copyWith(
 
     primaryColor: Colors.blue,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: scaffoldColor,
     // backgroundColor: chatBackgroundColor ,
     // primaryColorDark: metallicPrimaryColor,
     cardColor: Colors.white,
