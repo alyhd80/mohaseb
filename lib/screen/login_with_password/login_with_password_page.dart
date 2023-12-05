@@ -1,10 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/screen/component/custom_buttom.dart';
 import 'package:mohaseb/screen/login_with_password/view_model/login_with_password_view_model.dart';
-
+import "package:universal_html/html.dart" as html;
 @RoutePage(name: "login_with_password")
 class LoginWithPasswordPage extends ConsumerStatefulWidget {
   const LoginWithPasswordPage({super.key});
@@ -127,7 +129,16 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
                           height: size.height * 0.06,
                           child: CustomButton(
                             onTap: () {
-                              FocusScope.of(context).unfocus();
+                              print("check---------------");
+                              if(kIsWeb){
+                                 html.window.history.replaceState(null,"xxx",  '/*');
+                              // context.router.navigationHistory
+                              }
+
+                              context.router.pushAndPopUntil(Login(),predicate: (t){
+                                return false;
+                              });
+                              // FocusScope.of(context).unfocus();
                             },
                             title: "بعدی",
                             borderColor: Colors.white,

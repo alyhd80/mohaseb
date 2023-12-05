@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:mohaseb/route/AppRouter.gr.dart';
-import 'package:mohaseb/screen/login/component/login_body.dart';
-import 'package:mohaseb/screen/login_with_password/login_with_password_page.dart';
-import 'package:mohaseb/screen/main/main_page.dart';
 
-@AutoRouterConfig()
+
+@AutoRouterConfig(replaceInRouteName: "Screen,Route")
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [

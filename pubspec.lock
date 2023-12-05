@@ -1051,7 +1051,7 @@ packages:
     source: hosted
     version: "0.1.0"
   universal_html:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: universal_html
       sha256: "56536254004e24d9d8cfdb7dbbf09b74cf8df96729f38a2f5c238163e3d58971"

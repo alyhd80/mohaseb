@@ -8,11 +8,12 @@ import 'package:mohaseb/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:mohaseb/utils/app_constant/strings.dart';
+import 'utils/nonweb_url_strategy.dart' if (dart.library.html) 'utils/web_url_strategy.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
+  configureUrl();
   runApp(ProviderScope(child: const MyApp()));
 }
 final appRouter=AppRouter();
@@ -41,16 +42,16 @@ title: Strings.appName,
         theme: mobileLightThemeData(),
 
         routerConfig: appRouter.config(
-            deepLinkBuilder: (deepLink) {
-              if (deepLink.path.startsWith('/products')) {
-                // continute with the platfrom link
-                return deepLink;
-              } else {
-                return DeepLink.defaultPath;
-                // or DeepLink.path('/')
-                // or DeepLink([HomeRoute()])
-              }
-            }
+            // deepLinkBuilder: (deepLink) {
+            //   if (deepLink.path.startsWith('/products')) {
+            //     // continute with the platfrom link
+            //     return deepLink;
+            //   } else {
+            //     return DeepLink.;
+            //     // or DeepLink.path('/')
+            //     // or DeepLink([HomeRoute()])
+            //   }
+            // }
         ),
 
       ),
