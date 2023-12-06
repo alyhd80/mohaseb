@@ -25,3 +25,7 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
 
 var loginWithPasswordViewModelProvider = ChangeNotifierProvider.autoDispose<LoginWithPasswordViewModel>(
         (ref) => LoginWithPasswordViewModel());
+
+
+final loginPasswordShowPassword =
+StateProvider.autoDispose<bool>((ref) => false);

@@ -1,3 +1,4 @@
+import 'package:boxicons/boxicons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
@@ -5,8 +6,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/screen/component/custom_buttom.dart';
+import 'package:mohaseb/screen/component/custom_textfield.dart';
 import 'package:mohaseb/screen/login_with_password/view_model/login_with_password_view_model.dart';
+import 'package:mohaseb/utils/app_constant/colors.dart';
 import "package:universal_html/html.dart" as html;
+
 @RoutePage(name: "login_with_password")
 class LoginWithPasswordPage extends ConsumerStatefulWidget {
   const LoginWithPasswordPage({super.key});
@@ -46,6 +50,139 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
         },
         child: Stack(
           children: [
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("رمز ورود",
+                        style: Theme.of(context).textTheme.headline2!.copyWith(
+                            fontSize: size.width * 0.095 > 40
+                                ? 40
+                                : size.width * 0.095,
+                            fontWeight: FontWeight.w500,
+                            color: primaryColor)),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Text(
+                        "لطفا برای ورود، رمز عبور خود را که پیش از این ایجاد کرده اید را وارد کنید.",
+                        textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
+                        style: Theme.of(context).textTheme.headline2!.copyWith(
+                            fontSize: size.width * 0.045 > 16
+                                ? 16
+                                : size.width * 0.045,
+                            fontWeight: FontWeight.w500,
+                            color: greyFoundation06)),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Container(
+                      height:
+                          size.height * 0.075 < 45 ? 45 : size.height * 0.075,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: primaryColor, width: 2),
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                size.width * 0.04 > 15 ? 15 : size.width * 0.04,
+                            vertical: size.height * 0.015),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Consumer(builder: (context,ref,widget){
+                                bool showPassword =
+                                ref.watch(loginPasswordShowPassword);
+                                return CustomTextField(
+                                  hintTitle: "رمز ورود ",
+                                  hintColor: primaryColor,
+                                  // textEditingController: viewModel.numberTextEditingController,
+showPassword: showPassword,
+                                  textAlign: TextAlign.right,
+                                  onChange: (string) {
+                                    // if(string.isEmpty){
+                                    //   viewModel.notifierViewModel();
+                                    // }else if(string.length==1){
+                                    //   viewModel.notifierViewModel();
+                                    // }
+                                    //
+                                    // if(viewModel.isErrorValidation){
+                                    //   viewModel.isErrorValidation=false;
+                                    // }
+                                  },
+                                );
+                              }),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.03 > 15
+                                  ? 15
+                                  : size.width * 0.03,
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                if(ref.read(loginPasswordShowPassword)==true){
+                                  ref.read(loginPasswordShowPassword.notifier).state=false;
+                                }else{
+                                  ref.read(loginPasswordShowPassword.notifier).state=true;
+                                }
+                              },
+                              child: Container(
+                                color: Colors.transparent,
+                                child:
+                                    Consumer(builder: (context, ref, widget) {
+                                  bool showPassword =
+                                      ref.watch(loginPasswordShowPassword);
+                                  return AnimatedSwitcher(
+                                    duration: Duration(milliseconds: 500),
+                                    switchInCurve: Curves.ease,
+                                    switchOutCurve: Curves.ease,
+                                    child: AspectRatio(
+                                      key: Key(showPassword?"true":"false"),
+                                      aspectRatio: 1,
+                                      child: Icon(
+                                        !showPassword
+                                            ? Icons.remove_red_eye
+                                            : Icons.remove_red_eye_outlined,
+                                        color: primaryColor,
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    SizedBox(
+                      height: size.height * 0.06,
+                      width: size.width,
+                      child: Consumer(builder: (context, ref, wdiget) {
+                        return CustomButton(
+                          titleColor: primaryColor,
+                          backgroundColor: Colors.transparent,
+                          title: "وزود از طریق ازسال پیامک یک بار مصرف",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          onTap: () {
+                          },
+                        );
+                      }),
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.topCenter,
               child: AnimatedContainer(
@@ -130,12 +267,14 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
                           child: CustomButton(
                             onTap: () {
                               print("check---------------");
-                              if(kIsWeb){
-                                 html.window.history.replaceState(null,"xxx",  '/*');
-                              // context.router.navigationHistory
+                              if (kIsWeb) {
+                                html.window.history
+                                    .replaceState(null, "xxx", '/*');
+                                // context.router.navigationHistory
                               }
 
-                              context.router.pushAndPopUntil(Login(),predicate: (t){
+                              context.router.pushAndPopUntil(Login(),
+                                  predicate: (t) {
                                 return false;
                               });
                               // FocusScope.of(context).unfocus();

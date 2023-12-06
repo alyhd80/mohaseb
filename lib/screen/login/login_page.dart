@@ -1,6 +1,7 @@
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/screen/component/custom_buttom.dart';
 import 'package:mohaseb/screen/component/custom_textfield.dart';
 import 'package:mohaseb/screen/login/view_model/login_view_model.dart';
@@ -107,23 +108,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.01,
-                  ),
-                  SizedBox(
-                    height: size.height * 0.07,
-                    width: size.width,
-                    child: Consumer(builder: (context, ref, wdiget) {
-                      return CustomButton(
-                        titleColor: primaryColor,
-                        backgroundColor: Colors.transparent,
-                        title: "ورود با نام کاربری و رمز عبور",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        onTap: () {
- viewModel.navigationToLoginWithPassword(context, ref);
-                        },
-                      );
-                    }),
+                    height: size.height * 0.08,
                   ),
                 ],
               ),
@@ -213,6 +198,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           onTap: () {
                             FocusScope.of(context).unfocus();
 
+                            context.router.push(Login_with_password());
+                            return;
                             if(viewModel.isLoading){
                               showToast(context: context, title: "خطا", detail: "درخواست قبلی در حال اجرا می باشد", isSuccess: false);
                               return;

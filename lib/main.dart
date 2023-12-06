@@ -6,7 +6,6 @@ import 'package:mohaseb/l10n/l10.dart';
 import 'package:mohaseb/route/AppRouter.dart';
 import 'package:mohaseb/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:mohaseb/utils/app_constant/strings.dart';
 import 'utils/nonweb_url_strategy.dart' if (dart.library.html) 'utils/web_url_strategy.dart';
 
