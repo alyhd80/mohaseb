@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/screen/main/component/bottom_sheet.dart';
 import 'package:mohaseb/screen/main/view_model/main_view_model.dart';
+import 'package:mohaseb/screen/profile/profile_page.dart';
 
 @RoutePage(name: "main")
 class MainPage extends StatelessWidget {
@@ -23,7 +24,7 @@ class MainPage extends StatelessWidget {
               Container(color: Colors.red,),
               Container(color: Colors.blue,),
               Container(color: Colors.black,),
-              Container(color: Colors.yellow,),
+          ProfilePage()
 
             ],
           );

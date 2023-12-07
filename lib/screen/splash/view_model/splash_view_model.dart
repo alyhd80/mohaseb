@@ -11,7 +11,7 @@ class SplashViewModel extends ChangeNotifier {
     WidgetRef ref,
   ) async {
     Future.delayed(Duration(seconds: 1), () {
-      context.router.pushAndPopUntil(Login(),predicate: (t){
+      context.router.pushAndPopUntil(Main(),predicate: (t){
         return false;
       });
       // context.replaceRoute(Login());

@@ -11,9 +11,8 @@ int _pageSelected=0;
 
   set pageSelected(int value) {
     if(value==_pageSelected)return;
-    print(value);
     _pageSelected = value;
-    _pageController.animateToPage(value, duration: Duration(milliseconds: 500), curve: Curves.ease);
+    _pageController.jumpToPage(value);
     notifyListeners();
   }
 }

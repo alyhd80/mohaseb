@@ -1,3 +1,4 @@
+import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/screen/main/component/bottom_nav_tab_widget.dart';
@@ -29,7 +30,7 @@ class BottomSheetWidget extends ConsumerWidget {
               children: [
                 Expanded(
                     child: BottomNavTabWidget(
-                  iconData: Icons.add_box,
+                  iconData:viewModel.pageSelected == 3? Boxicons.bxs_user_circle:Boxicons.bx_user_circle,
                   isSelectedPage: viewModel.pageSelected == 3,
                   onTap: () {
                     viewModel.pageSelected = 3;
