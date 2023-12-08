@@ -32,6 +32,8 @@ Color greyLightColorBackground2 = const Color.fromRGBO(221, 219, 218, 1);
 Color greyDarkColorBackground2 = const Color.fromRGBO(150, 148, 146, 1);
 Color scaffoldColor = const Color.fromRGBO(246, 250, 254, 1);
 Color iconBasicColor = const Color.fromRGBO(94, 95, 96, 1);
+Color textColorGrey1 = const Color.fromRGBO(184, 197, 208, 1);
+Color textColorGrey2 = const Color.fromRGBO(121, 131, 139, 1);
 
 
 Color greyColorDivider = const Color.fromRGBO(236, 235, 234, 1);
