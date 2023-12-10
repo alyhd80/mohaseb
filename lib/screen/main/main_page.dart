@@ -18,6 +18,7 @@ class MainPage extends StatelessWidget {
         Consumer(builder: (context,ref,widget){
           MainViewModel viewModel=ref.watch(mainViewModelProvider);
           return PageView(
+            physics: NeverScrollableScrollPhysics(),
             reverse: true,
             controller: viewModel.pageController,
             children: [

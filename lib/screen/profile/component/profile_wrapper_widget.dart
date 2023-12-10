@@ -11,11 +11,21 @@ class ProfileWrapperWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+          borderRadius: BorderRadius.circular(16)
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: 5,
+        vertical: 5
+      ),
       child: Consumer(builder: (context, ref, widget) {
         int pageSelected = ref.watch(profileWrapperPageCount);
         return Row(
+
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             SelectedWrapperPageWidget(
               size: size,

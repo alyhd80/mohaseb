@@ -18,6 +18,8 @@ Color blueLight2 = const Color.fromRGBO(240, 252, 252, 1);
 
 Color borderColor1 = const Color.fromRGBO(155, 157, 161, 1);
 
+Color titleColor1 = const Color.fromRGBO(131, 141, 149, 1);
+
 
 
 Color lightBlue1 = const Color.fromRGBO(225, 230, 225, 1);

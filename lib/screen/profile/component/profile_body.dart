@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mohaseb/screen/profile/component/bio_profile_widget.dart';
+import 'package:mohaseb/screen/profile/component/email_profile_widget.dart';
 import 'package:mohaseb/screen/profile/component/profile_top_widget.dart';
 import 'package:mohaseb/screen/profile/component/profile_wrapper_widget.dart';
 
@@ -20,7 +22,11 @@ class ProfileBody extends StatelessWidget {
             ),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
 
-            ProfileWrapperWidget(size: size)
+            ProfileWrapperWidget(size: size),
+            SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
+            BioProfileWidget(size: size),
+            SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
+EmailProfileWidget(size: size)
           ],
         ),
       ),
