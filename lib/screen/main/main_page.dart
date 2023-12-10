@@ -15,21 +15,21 @@ class MainPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-        Consumer(builder: (context,ref,widget){
-          MainViewModel viewModel=ref.watch(mainViewModelProvider);
-          return PageView(
-            physics: NeverScrollableScrollPhysics(),
-            reverse: true,
-            controller: viewModel.pageController,
-            children: [
-              Container(color: Colors.red,),
-              Container(color: Colors.blue,),
-              Container(color: Colors.black,),
-          ProfilePage()
+       Consumer(builder: (context,ref,widget){
+         MainViewModel viewModel=ref.watch(mainViewModelProvider);
+         return PageView(
+           physics: NeverScrollableScrollPhysics(),
+           reverse: true,
+           controller: viewModel.pageController,
+           children: [
+             Container(color: Colors.red,),
+             Container(color: Colors.blue,),
+             Container(color: Colors.black,),
+             ProfilePage()
 
-            ],
-          );
-        }),
+           ],
+         );
+       }),
 
           Align(alignment: Alignment.bottomCenter,child: BottomSheetWidget(),)
         ],

@@ -21,12 +21,12 @@ class ProfileBody extends StatelessWidget {
               size: size,
             ),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
-
             ProfileWrapperWidget(size: size),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
             BioProfileWidget(size: size),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
-EmailProfileWidget(size: size)
+            EmailProfileWidget(size: size),
+            SizedBox(height: (size.height * 0.07 > 65 ? 65 : size.height * 0.07<45?45:size.height * 0.07)*1.5,)
           ],
         ),
       ),
