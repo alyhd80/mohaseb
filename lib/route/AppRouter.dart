@@ -10,7 +10,7 @@ class AppRouter extends $AppRouter {
         CustomRoute(
           page: Login.page,
           path: "/login",
-          transitionsBuilder: TransitionsBuilders.noTransition,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
 // guards: [SplashGard()]
         ),
     CustomRoute(

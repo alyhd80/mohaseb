@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mohaseb/data/local/app_perfrence.dart';
 import 'package:mohaseb/data/model/base_response_model.dart';
 import 'package:mohaseb/data/model/error_response_model.dart';
+import 'package:mohaseb/data/model/login_end_model.dart';
 import 'package:mohaseb/data/model/login_model.dart';
 import 'package:mohaseb/utils/app_constant/strings.dart';
 import 'package:mohaseb/utils/app_constant/urls.dart';
@@ -16,9 +17,9 @@ abstract class ApiClient {
   Future<BaseResponseModel<LoginModel>> login(
       {required BuildContext context, required Map<String,dynamic> map});
 
-  Future<BaseResponseModel> verifyLogin(
+  Future<BaseResponseModel<LoginEndModel>> verifyLogin(
       {required BuildContext context, required Map<String,dynamic> map});
 
-  Future<BaseResponseModel> loginPassword(
+  Future<BaseResponseModel<LoginEndModel>> loginPassword(
       {required BuildContext context, required Map<String,dynamic> map});
 }

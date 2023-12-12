@@ -73,14 +73,15 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<BaseResponseModel> verifyLogin({required BuildContext context, required Map<String, dynamic> map}) async {
+  Future<BaseResponseModel<LoginEndModel>> verifyLogin({required BuildContext context, required Map<String, dynamic> map}) async {
     await handleToken();
 
-    BaseResponseModel value = BaseResponseModel();
+    BaseResponseModel<LoginEndModel> value = BaseResponseModel();
 
     try {
       final _result = await _dio.post(Urls.login, data: map);
-      // value.data = LoginModel.fromJson(_result.data);
+      value.data=LoginEndModel.fromJson(_result.data);
+
       value.isSuccess = true;
     } on DioException catch (e) {
       if (e.response != null) {
@@ -94,14 +95,14 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<BaseResponseModel> loginPassword({required BuildContext context, required Map<String, dynamic> map}) async {
+  Future<BaseResponseModel<LoginEndModel>> loginPassword({required BuildContext context, required Map<String, dynamic> map}) async {
     await handleToken();
 
-    BaseResponseModel value = BaseResponseModel();
+    BaseResponseModel<LoginEndModel> value = BaseResponseModel();
 
     try {
       final _result = await _dio.post(Urls.loginPassword, data: map);
-
+value.data=LoginEndModel.fromJson(_result.data);
       value.isSuccess = true;
     } on DioException catch (e) {
       if (e.response != null) {

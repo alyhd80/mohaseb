@@ -8,12 +8,21 @@ import 'package:auto_route/auto_route.dart';
 
 class LoginWithPasswordViewModel extends ChangeNotifier {
   bool _changeSizeHeight = true;
+  bool _showPassword = false;
+
+  bool get showPassword => _showPassword;
+
+  set showPassword(bool value) {
+    if (value == _showDownButton) return;
+    _showPassword = value;
+    notifyListeners();
+  }
 
   bool get changeSizeHeight => _changeSizeHeight;
   bool _showDownButton = false;
   bool _isLoading = false;
 
-  bool _isLoadingSendOtp=false;
+  bool _isLoadingSendOtp = false;
 
   bool get isLoadingSendOtp => _isLoadingSendOtp;
 
@@ -28,8 +37,6 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
     _showDownButton = show;
     notifyListeners();
   }
-
-
 
   Future<void> findNavigationPage(
     BuildContext context,
@@ -46,17 +53,14 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
 
   Future<void> callApiToSendOTP(BuildContext context, WidgetRef ref,
       {required String phoneNumber}) async {
-    _isLoadingSendOtp=true;
+    _isLoadingSendOtp = true;
     notifyListeners();
 
+    final response = await ref
+        .read(apiClientProvider)
+        .login(context: context, map: {"phone": phoneNumber, 'wants_otp': '1'});
 
-
-
-    final response = await ref.read(apiClientProvider).login(
-        context: context, map: {"phone": phoneNumber,  'wants_otp': '1'});
-
-
-    if(response.isSuccess){
+    if (response.isSuccess) {
       showToast(
           context: context,
           title: "موفقیت",
@@ -68,26 +72,25 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
         await context.router.push(Verify(
           phoneNumber: phoneNumber,
           token: "response.data?.data?.otp?.signature" ?? "",
-          dateTime: "response.data?.data?.otp?.expiredAt.toString()"??"",
+          dateTime: "response.data?.data?.otp?.expiredAt.toString()" ?? "",
         ));
         findNavigationPage(context, ref);
-
       });
-
-    }else{
+    } else {
       showToast(
           context: context,
           title: "خطا",
           detail: response.errorResponseModel != null &&
-              response.errorResponseModel!.message!.isNotEmpty
+                  response.errorResponseModel!.message!.isNotEmpty
               ? response.errorResponseModel!.message!
               : Strings.unknownError,
           isSuccess: false);
     }
 
-    _isLoadingSendOtp=false;
+    _isLoadingSendOtp = false;
     notifyListeners();
   }
+
   Future<void> callApiToCheckPassword(BuildContext context, WidgetRef ref,
       {required String phoneNumber}) async {
     _isLoading = true;
@@ -104,8 +107,16 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
       showToast(
           context: context,
           title: "موفقیت",
-          detail: "ورود موفقعیت امیز - ابول بقیشو درست کنه اوک می کنم",
+          detail: "ورود موفقعیت امیز",
           isSuccess: true);
+      final perf = ref.read(appPreferenceHelperProvider);
+      await perf.setAccessToken(response.data!.data?.token);
+      await perf.setUserLoggedInMode(1);
+
+      context.router.pushAndPopUntil(Main(),predicate: (t){
+        return false;
+      });
+
     } else {
       showToast(
           context: context,
@@ -125,6 +136,3 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
 var loginWithPasswordViewModelProvider =
     ChangeNotifierProvider.autoDispose<LoginWithPasswordViewModel>(
         (ref) => LoginWithPasswordViewModel());
-
-final loginPasswordShowPassword =
-    StateProvider.autoDispose<bool>((ref) => false);

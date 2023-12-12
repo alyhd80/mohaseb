@@ -100,15 +100,14 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
                           children: [
                             Expanded(
                               child: Consumer(builder: (context, ref, widget) {
-                                bool showPassword =
-                                    ref.watch(loginPasswordShowPassword);
+
 
                                 return CustomTextField(
                                   hintTitle: "رمز ورود ",
                                   hintColor: primaryColor,
                                   textEditingController:
                                       viewModel.passwordTextEditingController,
-                                  showPassword: showPassword,
+                                  showPassword: viewModel.showPassword,
                                   textAlign: TextAlign.right,
                                   readOnly: viewModel.isLoading,
                                   textInputType: TextInputType.text,
@@ -133,32 +132,27 @@ if(string.length<8){
                             ),
                             GestureDetector(
                               onTap: () {
-                                if (ref.read(loginPasswordShowPassword) ==
+                                if (viewModel.showPassword==
                                     true) {
-                                  ref
-                                      .read(loginPasswordShowPassword.notifier)
-                                      .state = false;
+                                  viewModel.showPassword = false;
                                 } else {
-                                  ref
-                                      .read(loginPasswordShowPassword.notifier)
-                                      .state = true;
+                                  viewModel.showPassword  = true;
                                 }
                               },
                               child: Container(
                                 color: Colors.transparent,
                                 child:
                                     Consumer(builder: (context, ref, widget) {
-                                  bool showPassword =
-                                      ref.watch(loginPasswordShowPassword);
+
                                   return AnimatedSwitcher(
                                     duration: Duration(milliseconds: 500),
                                     switchInCurve: Curves.ease,
                                     switchOutCurve: Curves.ease,
                                     child: AspectRatio(
-                                      key: Key(showPassword ? "true" : "false"),
+                                      key: Key(     viewModel.showPassword  ? "true" : "false"),
                                       aspectRatio: 1,
                                       child: Icon(
-                                        !showPassword
+                                        !     viewModel.showPassword
                                             ? Icons.remove_red_eye
                                             : Icons.remove_red_eye_outlined,
                                         color: primaryColor,

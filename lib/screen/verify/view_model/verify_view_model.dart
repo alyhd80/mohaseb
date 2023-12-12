@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/application/data_provider.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/screen/verify/view_model/timer.dart';
 import 'package:mohaseb/service/show_toast.dart';
 import 'package:mohaseb/utils/app_constant/strings.dart';
+import 'package:auto_route/auto_route.dart';
 
 class VerifyViewModel extends ChangeNotifier {
   bool _changeSizeHeight = true;
@@ -47,8 +49,15 @@ class VerifyViewModel extends ChangeNotifier {
       showToast(
           context: context,
           title: "موفقیت",
-          detail: "ورود موفقعیت امیز - ابول بقیشو درست کنه اوک می کنم",
+          detail: "ورود موفقعیت امیز",
           isSuccess: true);
+      final perf = ref.read(appPreferenceHelperProvider);
+      await perf.setAccessToken(response.data!.data?.token);
+      await perf.setUserLoggedInMode(1);
+
+      context.router.pushAndPopUntil(Main(),predicate: (t){
+        return false;
+      });
 
     } else {
       showToast(
