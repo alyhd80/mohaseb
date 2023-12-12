@@ -182,10 +182,14 @@ if(string.length<8){
                         return CustomButton(
                           titleColor: primaryColor,
                           backgroundColor: Colors.transparent,
+                          isLoading: viewModel.isLoadingSendOtp,
                           title: "ورود از طریق ازسال پیامک یک بار مصرف",
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          onTap: () {},
+                          onTap: () {
+                            if(viewModel.isLoadingSendOtp)return;
+                            viewModel.callApiToSendOTP(context, ref, phoneNumber: widget.phoneNumber);
+                          },
                         );
                       }),
                     ),
@@ -276,6 +280,8 @@ if(string.length<8){
                           height: size.height * 0.06,
                           child: CustomButton(
                             onTap: () {
+                              if(viewModel.isLoadingSendOtp)return;
+
                               if(!viewModel.isLoading)
                          viewModel.callApiToCheckPassword(context, ref,phoneNumber: widget.phoneNumber);
                             },

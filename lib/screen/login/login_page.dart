@@ -77,6 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               textInputType: TextInputType.number,
                               textAlign: TextAlign.right,
                               maxCharacter: 11,
+                              readOnly: viewModel.isLoading,
                               onChange: (string){
 
                                 if(string.isEmpty){
