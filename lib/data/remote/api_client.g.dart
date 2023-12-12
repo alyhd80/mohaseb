@@ -22,7 +22,7 @@ class _ApiClient implements ApiClient {
 
     );
 
-    _dio.options.headers['content-Type'] = 'application/json';
+    // _dio.options.headers['content-Type'] = 'application/json';
     _dio.options.headers['accept'] = 'application/json';
   }
 
@@ -53,13 +53,12 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<BaseResponseModel<LoginModel>> login({required BuildContext context, required Map<String,dynamic> map}) async {
-    // TODO: implement login
     await handleToken();
 
     BaseResponseModel<LoginModel> value = BaseResponseModel();
 
     try {
-      final _result = await _dio.get(Urls.login, queryParameters: map);
+      final _result = await _dio.post(Urls.login, data: map);
       value.data = LoginModel.fromJson(_result.data);
       value.isSuccess = true;
     } on DioException catch (e) {
@@ -75,7 +74,6 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<BaseResponseModel> verifyLogin({required BuildContext context, required Map<String, dynamic> map}) async {
-    // TODO: implement verifyLogin
     await handleToken();
 
     BaseResponseModel value = BaseResponseModel();
@@ -83,6 +81,27 @@ class _ApiClient implements ApiClient {
     try {
       final _result = await _dio.post(Urls.login, data: map);
       // value.data = LoginModel.fromJson(_result.data);
+      value.isSuccess = true;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        value.errorResponseModel =
+            ErrorResponseModel.fromJson(e.response?.data);
+        await handleError(e, context);
+      }
+      value.isSuccess = false;
+    }
+    return value;
+  }
+
+  @override
+  Future<BaseResponseModel> loginPassword({required BuildContext context, required Map<String, dynamic> map}) async {
+    await handleToken();
+
+    BaseResponseModel value = BaseResponseModel();
+
+    try {
+      final _result = await _dio.post(Urls.loginPassword, data: map);
+
       value.isSuccess = true;
     } on DioException catch (e) {
       if (e.response != null) {

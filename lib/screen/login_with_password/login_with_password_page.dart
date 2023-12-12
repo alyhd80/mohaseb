@@ -13,7 +13,10 @@ import "package:universal_html/html.dart" as html;
 
 @RoutePage(name: "login_with_password")
 class LoginWithPasswordPage extends ConsumerStatefulWidget {
-  const LoginWithPasswordPage({super.key});
+  final String phoneNumber;
+
+  const LoginWithPasswordPage(
+      {super.key, @pathParam required this.phoneNumber});
 
   @override
   ConsumerState<LoginWithPasswordPage> createState() =>
@@ -96,25 +99,29 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Consumer(builder: (context,ref,widget){
+                              child: Consumer(builder: (context, ref, widget) {
                                 bool showPassword =
-                                ref.watch(loginPasswordShowPassword);
+                                    ref.watch(loginPasswordShowPassword);
+
                                 return CustomTextField(
                                   hintTitle: "رمز ورود ",
                                   hintColor: primaryColor,
-                                  // textEditingController: viewModel.numberTextEditingController,
-showPassword: showPassword,
+                                  textEditingController:
+                                      viewModel.passwordTextEditingController,
+                                  showPassword: showPassword,
                                   textAlign: TextAlign.right,
+                                  readOnly: viewModel.isLoading,
+                                  textInputType: TextInputType.text,
                                   onChange: (string) {
-                                    // if(string.isEmpty){
-                                    //   viewModel.notifierViewModel();
-                                    // }else if(string.length==1){
-                                    //   viewModel.notifierViewModel();
-                                    // }
-                                    //
-                                    // if(viewModel.isErrorValidation){
-                                    //   viewModel.isErrorValidation=false;
-                                    // }
+
+
+if(string.length<8){
+  viewModel.refreshViewModel(false);
+}else{
+  viewModel.refreshViewModel(true);
+}
+
+
                                   },
                                 );
                               }),
@@ -125,11 +132,16 @@ showPassword: showPassword,
                                   : size.width * 0.03,
                             ),
                             GestureDetector(
-                              onTap: (){
-                                if(ref.read(loginPasswordShowPassword)==true){
-                                  ref.read(loginPasswordShowPassword.notifier).state=false;
-                                }else{
-                                  ref.read(loginPasswordShowPassword.notifier).state=true;
+                              onTap: () {
+                                if (ref.read(loginPasswordShowPassword) ==
+                                    true) {
+                                  ref
+                                      .read(loginPasswordShowPassword.notifier)
+                                      .state = false;
+                                } else {
+                                  ref
+                                      .read(loginPasswordShowPassword.notifier)
+                                      .state = true;
                                 }
                               },
                               child: Container(
@@ -143,7 +155,7 @@ showPassword: showPassword,
                                     switchInCurve: Curves.ease,
                                     switchOutCurve: Curves.ease,
                                     child: AspectRatio(
-                                      key: Key(showPassword?"true":"false"),
+                                      key: Key(showPassword ? "true" : "false"),
                                       aspectRatio: 1,
                                       child: Icon(
                                         !showPassword
@@ -170,15 +182,13 @@ showPassword: showPassword,
                         return CustomButton(
                           titleColor: primaryColor,
                           backgroundColor: Colors.transparent,
-                          title: "وزود از طریق ازسال پیامک یک بار مصرف",
+                          title: "ورود از طریق ازسال پیامک یک بار مصرف",
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          onTap: () {
-                          },
+                          onTap: () {},
                         );
                       }),
                     ),
-
                   ],
                 ),
               ),
@@ -258,27 +268,18 @@ showPassword: showPassword,
                   duration: Duration(milliseconds: 500),
                   switchInCurve: Curves.ease,
                   switchOutCurve: Curves.ease,
-                  child: viewModel.changeSizeHeight
+                  child: viewModel.changeSizeHeight || !viewModel.showDownButton
                       ? null
                       : Container(
-                          key: Key(viewModel.changeSizeHeight ? "on" : "off"),
+                          key: Key(viewModel.changeSizeHeight  || !viewModel.showDownButton ? "on" : "off"),
                           width: size.width * 0.25,
                           height: size.height * 0.06,
                           child: CustomButton(
                             onTap: () {
-                              print("check---------------");
-                              if (kIsWeb) {
-                                html.window.history
-                                    .replaceState(null, "xxx", '/*');
-                                // context.router.navigationHistory
-                              }
-
-                              context.router.pushAndPopUntil(Login(),
-                                  predicate: (t) {
-                                return false;
-                              });
-                              // FocusScope.of(context).unfocus();
+                              if(!viewModel.isLoading)
+                         viewModel.callApiToCheckPassword(context, ref,phoneNumber: widget.phoneNumber);
                             },
+                            isLoading: viewModel.isLoading,
                             title: "بعدی",
                             borderColor: Colors.white,
                             backgroundColor: Colors.transparent,

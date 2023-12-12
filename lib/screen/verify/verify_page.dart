@@ -1,10 +1,7 @@
-import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mohaseb/data/local/arguments.dart';
 import 'package:mohaseb/screen/component/custom_buttom.dart';
-import 'package:mohaseb/screen/component/custom_textfield.dart';
 import 'package:mohaseb/screen/verify/component/verify_pine_code_widget.dart';
 import 'package:mohaseb/screen/verify/view_model/timer.dart';
 import 'package:mohaseb/screen/verify/view_model/verify_view_model.dart';
@@ -14,8 +11,13 @@ import 'package:auto_route/auto_route.dart';
 
 @RoutePage(name: "verify")
 class VerifyPage extends ConsumerStatefulWidget {
-  final String phoneNumber,token;
-  const VerifyPage({super.key,@pathParam required this.phoneNumber,@pathParam required this.token});
+  final String phoneNumber, token, dateTime;
+
+  const VerifyPage(
+      {super.key,
+      @pathParam required this.phoneNumber,
+      @pathParam required this.token,
+      @pathParam required this.dateTime});
 
   @override
   ConsumerState<VerifyPage> createState() => _VerifyPageState();
@@ -28,7 +30,6 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       viewModel.findNavigationPage(context, ref);
     });
@@ -36,20 +37,16 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     viewModel = ref.watch(verifyViewModelProvider);
-
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: WillPopScope(
-
-        onWillPop: () async{
+        onWillPop: () async {
           FocusScope.of(context).unfocus();
 
           viewModel.findNavigationPage(context, ref);
           Future.delayed(Duration(milliseconds: 500), () async {
-        Navigator.of(context).pop();
+            Navigator.of(context).pop();
             viewModel.findNavigationPage(context, ref);
           });
           return false;
@@ -65,8 +62,9 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                   children: [
                     Text("ورود",
                         style: Theme.of(context).textTheme.headline2!.copyWith(
-                            fontSize:
-                                size.width * 0.095 > 40 ? 40 : size.width * 0.095,
+                            fontSize: size.width * 0.095 > 40
+                                ? 40
+                                : size.width * 0.095,
                             fontWeight: FontWeight.w500,
                             color: primaryColor)),
                     SizedBox(
@@ -78,15 +76,18 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                       TextSpan(
                           text:
                               "لطفا برای ورود، رمز یکبار مصرف ارسال شده به شماره ",
-                          style: Theme.of(context).textTheme.headline2!.copyWith(
-                              fontSize: size.width * 0.045 > 16
-                                  ? 16
-                                  : size.width * 0.045,
-                              fontWeight: FontWeight.w500,
-                              color: borderColor1),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  fontSize: size.width * 0.045 > 16
+                                      ? 16
+                                      : size.width * 0.045,
+                                  fontWeight: FontWeight.w500,
+                                  color: borderColor1),
                           children: [
                             TextSpan(
-                              text:  widget.phoneNumber??"",
+                              text: widget.phoneNumber ?? "",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline2!
@@ -115,22 +116,23 @@ class _VerifyPageState extends ConsumerState<VerifyPage> {
                       height: size.height * 0.015,
                     ),
                     VerifyPineCodeWidget(
-                        textEditingController: viewModel.pinCodeTextEditingController,
+                        textEditingController:
+                            viewModel.pinCodeTextEditingController,
                         onChange: (string) {
-
-
-                          if(string.length==4){
-viewModel.callApiToVerify(context, ref, phoneNumber:widget. phoneNumber, token:widget. token);
+                          if (string.length == 4) {
+                            viewModel.callApiToVerify(context, ref,
+                                phoneNumber: widget.phoneNumber,
+                                token: widget.token);
                           }
-
                         }),
-                    Consumer(builder: (context, ref, widget) {
+                    Consumer(builder: (context, ref, widgett) {
                       var viewModelTimer = ref.watch(timerViewModelProvider);
 
                       return Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: size.width * 0.2),
-                        height: size.height * 0.07 < 40 ? 40 : size.height * 0.07,
+                        height:
+                            size.height * 0.07 < 40 ? 40 : size.height * 0.07,
                         alignment:
                             viewModelTimer.time == 0 ? null : Alignment.center,
                         width: size.width,
@@ -141,7 +143,13 @@ viewModel.callApiToVerify(context, ref, phoneNumber:widget. phoneNumber, token:w
                                 titleColor: blueAzure,
                                 fontSize: 16,
                                 backgroundColor: Colors.transparent,
-                                onTap: () {},
+                                isLoading: viewModel.isLoadingResend,
+                                onTap: () {
+                                  viewModel.callApiToResendOtp(
+                                      context: context,
+                                      ref: ref,
+                                      phoneNumber: widget.phoneNumber);
+                                },
                               )
                             : AnimatedSwitcher(
                                 duration: const Duration(milliseconds: 500),
@@ -227,7 +235,8 @@ viewModel.callApiToVerify(context, ref, phoneNumber:widget. phoneNumber, token:w
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.02, vertical: size.height * 0.02),
+                    horizontal: size.width * 0.02,
+                    vertical: size.height * 0.02),
                 child: AnimatedSwitcher(
                   duration: Duration(milliseconds: 500),
                   switchInCurve: Curves.ease,
@@ -240,12 +249,15 @@ viewModel.callApiToVerify(context, ref, phoneNumber:widget. phoneNumber, token:w
                           height: size.height * 0.06,
                           child: CustomButton(
                             onTap: () {
-                              FocusScope.of(context).unfocus();
-
-                              // viewModel.findNavigationPage(context, ref);
-                              context.router.pop();
+                              if (viewModel.pinCodeTextEditingController.text
+                                      .length ==
+                                  4) {
+                                viewModel.callApiToVerify(context, ref,
+                                    phoneNumber: widget.phoneNumber,
+                                    token: widget.token);
+                              }
                             },
-                            title: "قبلی",
+                            title: "بعدی",
                             isLoading: viewModel.isLoading,
                             borderColor: Colors.white,
                             backgroundColor: Colors.transparent,

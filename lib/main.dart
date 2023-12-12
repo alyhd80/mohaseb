@@ -59,3 +59,16 @@ title: Strings.appName,
 }
 
 
+
+//     print("check---------------");
+//                               if (kIsWeb) {
+//                                 html.window.history
+//                                     .replaceState(null, "xxx", '/*');
+//                                 // context.router.navigationHistory
+//                               }
+//
+//                               context.router.pushAndPopUntil(Login(),
+//                                   predicate: (t) {
+//                                 return false;
+//                               });
+//                               // FocusScope.of(context).unfocus();

@@ -11,11 +11,12 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? textEditingController;
   final TextInputType? textInputType;
   final int? maxLine;
-  final bool? showPassword, isAmount, isEnable, isSmartArticle;
+  final bool? showPassword, isAmount, isEnable, isSmartArticle,readOnly;
   final TextAlign? textAlign;
   final int? maxCharacter;
   final Function(String)? onChange, onSubmittedEnd;
   final String? Function(String? value)? validator;
+
 
   final Color? titleColor,hintColor;
   final TextInputAction? textInputAction;
@@ -37,7 +38,7 @@ class CustomTextField extends StatelessWidget {
     this.textInputAction,
     this.isSmartArticle,
     this.onSubmittedEnd, this.hintColor,
-    this.validator,
+    this.validator, this.readOnly,
   }) : super(key: key);
 
   @override
@@ -45,7 +46,7 @@ class CustomTextField extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return TextFormField(
-
+readOnly: readOnly??false,
       onFieldSubmitted: onSubmittedEnd,
       onChanged: onChange ?? (string) {},
       obscureText: showPassword ?? false,

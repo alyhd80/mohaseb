@@ -198,8 +198,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           onTap: () {
                             FocusScope.of(context).unfocus();
 
-                            context.router.push(Login_with_password());
-                            return;
                             if(viewModel.isLoading){
                               showToast(context: context, title: "خطا", detail: "درخواست قبلی در حال اجرا می باشد", isSuccess: false);
                               return;

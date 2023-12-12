@@ -19,4 +19,6 @@ abstract class ApiClient {
   Future<BaseResponseModel> verifyLogin(
       {required BuildContext context, required Map<String,dynamic> map});
 
+  Future<BaseResponseModel> loginPassword(
+      {required BuildContext context, required Map<String,dynamic> map});
 }

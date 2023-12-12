@@ -11,7 +11,7 @@ class LoginViewModel extends ChangeNotifier {
   bool _changeSizeHeight = false;
   bool _isErrorValidation = false;
 
-  void notifierViewModel(){
+  void notifierViewModel() {
     notifyListeners();
   }
 
@@ -83,12 +83,23 @@ class LoginViewModel extends ChangeNotifier {
 
       findNavigationPage(context, ref);
 
-      await Future.delayed(Duration(milliseconds: 500), () async {
-        await context.router
-            .push(Verify(phoneNumber: numberTextEditingController.text, token: response.data?.data?.otp?.signature??""));
+      if (response.data!.hasPassword!) {
+        await Future.delayed(Duration(milliseconds: 500), () async {
+          await context.router.push(Login_with_password(phoneNumber:  numberTextEditingController.text));
 
-        findNavigationPage(context, ref);
-      });
+          findNavigationPage(context, ref);
+        });
+      } else {
+        await Future.delayed(Duration(milliseconds: 500), () async {
+          await context.router.push(Verify(
+              phoneNumber: numberTextEditingController.text,
+              token: response.data?.data?.otp?.signature ?? "",
+            dateTime: response.data?.data?.otp?.expiredAt.toString()??"",
+          ));
+
+          findNavigationPage(context, ref);
+        });
+      }
     } else {
       showToast(
           context: context,
@@ -104,19 +115,7 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> navigationToLoginWithPassword(    BuildContext context,
-      WidgetRef ref,)async{
-    if(_isLoading==true){
-      return;
-    }
-    findNavigationPage(context, ref);
 
-    await Future.delayed(Duration(milliseconds: 500), () async {
-      await context.router
-          .push(Login_with_password());
-    });
-      findNavigationPage(context, ref);
-  }
 }
 
 var loginViewModelProvider = ChangeNotifierProvider.autoDispose<LoginViewModel>(

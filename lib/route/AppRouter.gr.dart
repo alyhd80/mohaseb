@@ -9,7 +9,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/material.dart' as _i7;
+import 'package:flutter/foundation.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 import 'package:mohaseb/screen/login/login_page.dart' as _i1;
 import 'package:mohaseb/screen/login_with_password/login_with_password_page.dart'
     as _i2;
@@ -29,9 +30,16 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     Login_with_password.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<Login_with_passwordArgs>(
+          orElse: () => Login_with_passwordArgs(
+              phoneNumber: pathParams.getString('phoneNumber')));
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.LoginWithPasswordPage(),
+        child: _i2.LoginWithPasswordPage(
+          key: args.key,
+          phoneNumber: args.phoneNumber,
+        ),
       );
     },
     Main.name: (routeData) {
@@ -52,6 +60,7 @@ abstract class $AppRouter extends _i6.RootStackRouter {
           orElse: () => VerifyArgs(
                 phoneNumber: pathParams.getString('phoneNumber'),
                 token: pathParams.getString('token'),
+                dateTime: pathParams.getString('dateTime'),
               ));
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -59,6 +68,7 @@ abstract class $AppRouter extends _i6.RootStackRouter {
           key: args.key,
           phoneNumber: args.phoneNumber,
           token: args.token,
+          dateTime: args.dateTime,
         ),
       );
     },
@@ -81,16 +91,41 @@ class Login extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginWithPasswordPage]
-class Login_with_password extends _i6.PageRouteInfo<void> {
-  const Login_with_password({List<_i6.PageRouteInfo>? children})
-      : super(
+class Login_with_password extends _i6.PageRouteInfo<Login_with_passwordArgs> {
+  Login_with_password({
+    _i7.Key? key,
+    required String phoneNumber,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
           Login_with_password.name,
+          args: Login_with_passwordArgs(
+            key: key,
+            phoneNumber: phoneNumber,
+          ),
+          rawPathParams: {'phoneNumber': phoneNumber},
           initialChildren: children,
         );
 
   static const String name = 'Login_with_password';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i6.PageInfo<Login_with_passwordArgs> page =
+      _i6.PageInfo<Login_with_passwordArgs>(name);
+}
+
+class Login_with_passwordArgs {
+  const Login_with_passwordArgs({
+    this.key,
+    required this.phoneNumber,
+  });
+
+  final _i7.Key? key;
+
+  final String phoneNumber;
+
+  @override
+  String toString() {
+    return 'Login_with_passwordArgs{key: $key, phoneNumber: $phoneNumber}';
+  }
 }
 
 /// generated route for
@@ -125,9 +160,10 @@ class Splash extends _i6.PageRouteInfo<void> {
 /// [_i5.VerifyPage]
 class Verify extends _i6.PageRouteInfo<VerifyArgs> {
   Verify({
-    _i7.Key? key,
+    _i8.Key? key,
     required String phoneNumber,
     required String token,
+    required String dateTime,
     List<_i6.PageRouteInfo>? children,
   }) : super(
           Verify.name,
@@ -135,10 +171,12 @@ class Verify extends _i6.PageRouteInfo<VerifyArgs> {
             key: key,
             phoneNumber: phoneNumber,
             token: token,
+            dateTime: dateTime,
           ),
           rawPathParams: {
             'phoneNumber': phoneNumber,
             'token': token,
+            'dateTime': dateTime,
           },
           initialChildren: children,
         );
@@ -153,16 +191,19 @@ class VerifyArgs {
     this.key,
     required this.phoneNumber,
     required this.token,
+    required this.dateTime,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final String phoneNumber;
 
   final String token;
 
+  final String dateTime;
+
   @override
   String toString() {
-    return 'VerifyArgs{key: $key, phoneNumber: $phoneNumber, token: $token}';
+    return 'VerifyArgs{key: $key, phoneNumber: $phoneNumber, token: $token, dateTime: $dateTime}';
   }
 }
