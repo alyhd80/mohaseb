@@ -1,13 +1,18 @@
+import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mohaseb/screen/profile/view_model/profile_view_model.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
 
-class EmailProfileWidget extends StatelessWidget {
+class EmailProfileWidget extends ConsumerWidget {
   final Size size;
 
   const EmailProfileWidget({super.key, required this.size});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var viewModel = ref.watch(profileViewModelProvider);
+
     return Container(
       width: size.width,
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
@@ -15,7 +20,7 @@ class EmailProfileWidget extends StatelessWidget {
           color: Colors.grey.withOpacity(0.1),
           spreadRadius: 5,
           blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
+          offset: const Offset(0, 3), // changes position of shadow
         ),
       ]),
       padding: EdgeInsets.symmetric(
@@ -30,52 +35,29 @@ class EmailProfileWidget extends StatelessWidget {
                 color: titleColor1,
                 fontSize: size.width * 0.05 > 15 ? 15 : size.width * 0.05),
           ),
-          SizedBox(height: size.height*0.02>10?10:size.height*0.02<5?5:size.width*0.02,),
-
-          Container(alignment: Alignment.centerLeft,
-            child: Text("booleannemati@gmail.com",
+          SizedBox(
+            height: size.height * 0.02 > 10
+                ? 10
+                : size.height * 0.02 < 5
+                    ? 5
+                    : size.width * 0.02,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "booleannemati@gmail.com",
               style: Theme.of(context).textTheme.headline2!.copyWith(
                   color: titleColor1,
-                  fontSize: size.width * 0.05 > 15 ? 15 : size.width * 0.05),),
-          ),
-          SizedBox(height: size.height*0.02>10?10:size.height*0.02<5?5:size.width*0.02,),
-
-          Container(
-            decoration: BoxDecoration(),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(right: 5, bottom: 5, top: 5),
-                  child: Row(
-                    children: [
-                      Text(
-                        "ویرایش",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline2!
-                            .copyWith(
-                            color: darkBlue4,
-                            fontWeight: FontWeight.w500,
-                            fontSize: size.width * 0.035 > 15
-                                ? 15
-                                : size.width * 0.035),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: darkBlue4,
-                        size: 15,
-                      )
-                    ],
-                  ),
-                ),
-                Container()
-              ],
+                  fontSize: size.width * 0.05 > 15 ? 15 : size.width * 0.05),
             ),
-          )
-
+          ),
+          SizedBox(
+            height: size.height * 0.02 > 10
+                ? 10
+                : size.height * 0.02 < 5
+                    ? 5
+                    : size.width * 0.02,
+          ),
         ],
       ),
     );

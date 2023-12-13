@@ -3,33 +3,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/screen/profile/component/selected_wrapper_page_widget.dart';
 import 'package:mohaseb/screen/profile/view_model/profile_view_model.dart';
 
-class ProfileWrapperWidget extends StatelessWidget {
+class ProfileWrapperWidget extends ConsumerWidget {
   final Size size;
-
   const ProfileWrapperWidget({super.key, required this.size});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-          borderRadius: BorderRadius.circular(16)
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 5,
-        vertical: 5
-      ),
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Consumer(builder: (context, ref, widget) {
         int pageSelected = ref.watch(profileWrapperPageCount);
         return Row(
-
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             SelectedWrapperPageWidget(
               size: size,
-              title: "  درباره  ",
+              title: " پروفایل ",
               isSelected: pageSelected == 2,
               onTap: () {
                 ref.read(profileWrapperPageCount.notifier).state = 2;
@@ -38,16 +32,18 @@ class ProfileWrapperWidget extends StatelessWidget {
             SelectedWrapperPageWidget(
               size: size,
               title: "  گزارش  ",
-              isSelected: pageSelected == 1,      onTap: () {
-              ref.read(profileWrapperPageCount.notifier).state = 1;
-            },
+              isSelected: pageSelected == 1,
+              onTap: () {
+                ref.read(profileWrapperPageCount.notifier).state = 1;
+              },
             ),
             SelectedWrapperPageWidget(
               size: size,
               title: "فعالیت ها",
-              isSelected: pageSelected == 0,      onTap: () {
-              ref.read(profileWrapperPageCount.notifier).state = 0;
-            },
+              isSelected: pageSelected == 0,
+              onTap: () {
+                ref.read(profileWrapperPageCount.notifier).state = 0;
+              },
             ),
           ],
         );

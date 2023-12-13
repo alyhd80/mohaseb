@@ -11,14 +11,14 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? textEditingController;
   final TextInputType? textInputType;
   final int? maxLine;
-  final bool? showPassword, isAmount, isEnable, isSmartArticle,readOnly;
+  final bool? showPassword, isAmount, isEnable, isSmartArticle, readOnly;
   final TextAlign? textAlign;
   final int? maxCharacter;
   final Function(String)? onChange, onSubmittedEnd;
   final String? Function(String? value)? validator;
+  final double? fontSize;
 
-
-  final Color? titleColor,hintColor;
+  final Color? titleColor, hintColor;
   final TextInputAction? textInputAction;
 
   const CustomTextField({
@@ -37,8 +37,11 @@ class CustomTextField extends StatelessWidget {
     this.isEnable = true,
     this.textInputAction,
     this.isSmartArticle,
-    this.onSubmittedEnd, this.hintColor,
-    this.validator, this.readOnly,
+    this.onSubmittedEnd,
+    this.hintColor,
+    this.validator,
+    this.readOnly,
+    this.fontSize,
   }) : super(key: key);
 
   @override
@@ -46,7 +49,7 @@ class CustomTextField extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return TextFormField(
-readOnly: readOnly??false,
+      readOnly: readOnly ?? false,
       onFieldSubmitted: onSubmittedEnd,
       onChanged: onChange ?? (string) {},
       obscureText: showPassword ?? false,
@@ -57,7 +60,7 @@ readOnly: readOnly??false,
       textInputAction: textInputAction ?? TextInputAction.send,
       enabled: isEnable,
       keyboardType:
-      textInputType ?? const TextInputType.numberWithOptions(decimal: true),
+          textInputType ?? const TextInputType.numberWithOptions(decimal: true),
       // validator: validator,
       inputFormatters: <TextInputFormatter>[
         if (isSmartArticle == true) ...[
@@ -65,7 +68,7 @@ readOnly: readOnly??false,
             integerDigits: 1000,
             decimalDigits: 2,
             maxValue:
-            '10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.00000000000000000',
+                '10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.00000000000000000',
             decimalSeparator: '.',
             groupDigits: 3,
             groupSeparator: ',',
@@ -83,7 +86,7 @@ readOnly: readOnly??false,
               integerDigits: 1000,
               decimalDigits: 0,
               maxValue:
-              '10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.00000000000000000',
+                  '10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.00000000000000000',
               decimalSeparator: '.',
               groupDigits: 3,
               groupSeparator: ',',
@@ -101,25 +104,73 @@ readOnly: readOnly??false,
         ]
       ],
       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-          fontSize: (size.width * 0.06 > size.height * 0.025
-              ? size.height * 0.025
-              : size.width * 0.06) >
-              16
-              ? 16
+          fontSize: fontSize != null
+              ? fontSize == 18
+                  ? size.width * 0.055 > 18
+                      ? 18
+                      : size.width * 0.055
+                  : (size.width * 0.06 > size.height * 0.025
+                              ? size.height * 0.025
+                              : size.width * 0.06) >
+                          16
+                      ? 16
+                      : (size.width * 0.06 > size.height * 0.025
+                                  ? size.height * 0.025
+                                  : size.width * 0.06) <
+                              14
+                          ? 14
+                          : (size.width * 0.06 > size.height * 0.025
+                              ? size.height * 0.025
+                              : size.width * 0.06)
               : (size.width * 0.06 > size.height * 0.025
-              ? size.height * 0.025
-              : size.width * 0.06) <
-              14
-              ? 14
-              : (size.width * 0.06 > size.height * 0.025
-              ? size.height * 0.025
-              : size.width * 0.06),
+                          ? size.height * 0.025
+                          : size.width * 0.06) >
+                      16
+                  ? 16
+                  : (size.width * 0.06 > size.height * 0.025
+                              ? size.height * 0.025
+                              : size.width * 0.06) <
+                          14
+                      ? 14
+                      : (size.width * 0.06 > size.height * 0.025
+                          ? size.height * 0.025
+                          : size.width * 0.06),
           fontWeight: FontWeight.w500,
           color: titleColor ?? iconsDark),
       decoration: InputDecoration.collapsed(
         hintText: hintTitle ?? " ",
         hintStyle: Theme.of(context).textTheme.headline2!.copyWith(
-            fontSize: size.width * 0.45 > 14 ? 14 : size.width * 0.45,
+            fontSize: fontSize != null
+                ? fontSize == 18
+                    ? size.width * 0.055 > 18
+                        ? 18
+                        : size.width * 0.055
+                    : (size.width * 0.06 > size.height * 0.025
+                                ? size.height * 0.025
+                                : size.width * 0.06) >
+                            16
+                        ? 16
+                        : (size.width * 0.06 > size.height * 0.025
+                                    ? size.height * 0.025
+                                    : size.width * 0.06) <
+                                14
+                            ? 14
+                            : (size.width * 0.06 > size.height * 0.025
+                                ? size.height * 0.025
+                                : size.width * 0.06)
+                : (size.width * 0.06 > size.height * 0.025
+                            ? size.height * 0.025
+                            : size.width * 0.06) >
+                        16
+                    ? 16
+                    : (size.width * 0.06 > size.height * 0.025
+                                ? size.height * 0.025
+                                : size.width * 0.06) <
+                            14
+                        ? 14
+                        : (size.width * 0.06 > size.height * 0.025
+                            ? size.height * 0.025
+                            : size.width * 0.06),
             fontWeight: FontWeight.w500,
             color: hintColor ?? greyFoundation09),
       ),

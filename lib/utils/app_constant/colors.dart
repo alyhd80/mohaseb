@@ -103,6 +103,7 @@ Color iconsDefault = const Color.fromRGBO(112, 110, 107, 1);
 Color iconsLight = const Color.fromRGBO(176, 173, 171, 1);
 
 
+Color dividerColor1 = const Color.fromRGBO(244, 245, 245, 1);
 
 
 

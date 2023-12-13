@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mohaseb/screen/profile/component/bio_profile_widget.dart';
 import 'package:mohaseb/screen/profile/component/email_profile_widget.dart';
 import 'package:mohaseb/screen/profile/component/profile_top_widget.dart';
 import 'package:mohaseb/screen/profile/component/profile_wrapper_widget.dart';
+import 'package:mohaseb/screen/profile/view_model/profile_view_model.dart';
 
-class ProfileBody extends StatelessWidget {
+class ProfileBody extends ConsumerStatefulWidget {
   const ProfileBody({super.key});
+
+  @override
+  ConsumerState<ProfileBody> createState() => _ProfileBodyState();
+}
+
+class _ProfileBodyState extends ConsumerState<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Padding(
         padding:  EdgeInsets.symmetric(horizontal: size.width*0.05>15?15:size.width*0.05),
@@ -17,11 +26,9 @@ class ProfileBody extends StatelessWidget {
           children: [
             SafeArea(child: Container()),
             SizedBox(height: size.height*0.02>10?10:size.height*0.02<5?5:size.width*0.02,),
-            ProfileTopWidget(
-              size: size,
-            ),
-            SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
             ProfileWrapperWidget(size: size),
+            SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
+            ProfileTopWidget(size: size,),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
             BioProfileWidget(size: size),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
