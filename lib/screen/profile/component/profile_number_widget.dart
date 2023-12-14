@@ -27,24 +27,20 @@ class ProfileNumberWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.06 > 20 ? 20 : size.width * 0.06,
           vertical: size.height * 0.015 > 12 ? 12 : size.height * 0.015),
-      child: Consumer(builder: (context,ref,widget){
-        var viewModel=ref.watch(profileViewModelProvider);
+      child: Consumer(builder: (context, ref, widget) {
+        var viewModel = ref.watch(profileViewModelProvider);
         return Row(
           children: [
-
-            Expanded(child: Column(
+            Expanded(
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   "استان",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(
+                  style: Theme.of(context).textTheme.headline2!.copyWith(
                       color: textColorGrey1,
-                      fontSize: size.width * 0.035 > 13
-                          ? 13
-                          : size.width * 0.035),
+                      fontSize:
+                          size.width * 0.035 > 13 ? 13 : size.width * 0.035),
                 ),
                 SizedBox(height: 3),
                 AnimatedSwitcher(
@@ -69,9 +65,9 @@ class ProfileNumberWidget extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(left: 8),
                             child: Icon(
-                              Boxicons.bx_calendar_alt,
+                              Boxicons.bx_chevron_down,
                               color: iconsLight,
-                              size: 15,
+                              size: 16,
                             ),
                           ),
                         ] else ...[
@@ -89,10 +85,10 @@ class ProfileNumberWidget extends StatelessWidget {
                                   .textTheme
                                   .headline2!
                                   .copyWith(
-                                  color: textColorGrey2,
-                                  fontSize:  size.width * 0.045 > 14
-        ? 14
-            : size.width * 0.045),
+                                      color: textColorGrey2,
+                                      fontSize: size.width * 0.045 > 14
+                                          ? 14
+                                          : size.width * 0.045),
                             ),
                             SizedBox(
                               height: 3,
@@ -111,89 +107,78 @@ class ProfileNumberWidget extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-
             Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "تلفن",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline2!
-                          .copyWith(
-                          color: textColorGrey1,
-                          fontSize: size.width * 0.035 > 13
-                              ? 13
-                              : size.width * 0.035),
-                    ),
-                    SizedBox(height: 3),
-                    AnimatedSwitcher(
-                      duration: Duration(milliseconds: 500),
-                      child: Container(
-                        key: Key(viewModel.isEditable ? "on" : "off"),
-                        child: viewModel.isEditable
-                            ? Container(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "تلفن",
+                  style: Theme.of(context).textTheme.headline2!.copyWith(
+                      color: textColorGrey1,
+                      fontSize:
+                          size.width * 0.035 > 13 ? 13 : size.width * 0.035),
+                ),
+                SizedBox(height: 3),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 500),
+                  child: Container(
+                    key: Key(viewModel.isEditable ? "on" : "off"),
+                    child: viewModel.isEditable
+                        ? Container(
                             padding: EdgeInsets.symmetric(vertical: 3),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border:
-                                Border.all(color: borderColor2)),
+                                border: Border.all(color: borderColor2)),
                             child: CustomTextField(
                               hintTitle: "تلفن",
-                              textEditingController: viewModel
-                                  .numberEditingController,
+                              textEditingController:
+                                  viewModel.numberEditingController,
                               fontSize: 14,
                               hintColor: textColorGrey2,
                               textInputType: TextInputType.number,
                               maxCharacter: 11,
-
                             ))
-                            : Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.transparent)
-                          ),
-                              child: Row(
-                          children: [
-                              Expanded(child: Container()),
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    height: 3,
-                                  ),
-                                  Text(
-                                    "09116163941",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline2!
-                                        .copyWith(
-                                        color: textColorGrey2,
-                                        fontSize:
-                                        size.width * 0.045 > 14
-                                            ? 14
-                                            : size.width * 0.045),
-                                  ),
-                                  SizedBox(
-                                    height: 3,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                          ],
-                        ),
+                        : Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.transparent)),
+                            child: Row(
+                              children: [
+                                Expanded(child: Container()),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Text(
+                                      "09116163941",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline2!
+                                          .copyWith(
+                                              color: textColorGrey2,
+                                              fontSize: size.width * 0.045 > 14
+                                                  ? 14
+                                                  : size.width * 0.045),
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 3,
+                                ),
+                              ],
                             ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                )),
-
+                          ),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+              ],
+            )),
           ],
         );
       }),
