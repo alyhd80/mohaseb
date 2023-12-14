@@ -1,5 +1,5 @@
 
-part of 'api_client.dart';
+part of 'api.client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -102,7 +102,7 @@ class _ApiClient implements ApiClient {
 
     try {
       final _result = await _dio.post(Urls.loginPassword, data: map);
-value.data=LoginEndModel.fromJson(_result.data);
+      value.data=LoginEndModel.fromJson(_result.data);
       value.isSuccess = true;
     } on DioException catch (e) {
       if (e.response != null) {

@@ -8,23 +8,24 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:flutter/foundation.dart' as _i7;
-import 'package:flutter/material.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:flutter/foundation.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 import 'package:mohaseb/screen/login/login_page.dart' as _i1;
 import 'package:mohaseb/screen/login_with_password/login_with_password_page.dart'
     as _i2;
 import 'package:mohaseb/screen/main/main_page.dart' as _i3;
-import 'package:mohaseb/screen/splash/splash_page.dart' as _i4;
-import 'package:mohaseb/screen/verify/verify_page.dart' as _i5;
+import 'package:mohaseb/screen/setting/setting_page.dart' as _i4;
+import 'package:mohaseb/screen/splash/splash_page.dart' as _i5;
+import 'package:mohaseb/screen/verify/verify_page.dart' as _i6;
 
-abstract class $AppRouter extends _i6.RootStackRouter {
+abstract class $AppRouter extends _i7.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i6.PageFactory> pagesMap = {
+  final Map<String, _i7.PageFactory> pagesMap = {
     Login.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.LoginPage(),
       );
@@ -34,7 +35,7 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       final args = routeData.argsAs<Login_with_passwordArgs>(
           orElse: () => Login_with_passwordArgs(
               phoneNumber: pathParams.getString('phoneNumber')));
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.LoginWithPasswordPage(
           key: args.key,
@@ -43,15 +44,21 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     Main.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i3.MainPage(),
       );
     },
-    Splash.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
+    Setting.name: (routeData) {
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.SplashPage(),
+        child: const _i4.SettingPage(),
+      );
+    },
+    Splash.name: (routeData) {
+      return _i7.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i5.SplashPage(),
       );
     },
     Verify.name: (routeData) {
@@ -62,9 +69,9 @@ abstract class $AppRouter extends _i6.RootStackRouter {
                 token: pathParams.getString('token'),
                 dateTime: pathParams.getString('dateTime'),
               ));
-      return _i6.AutoRoutePage<dynamic>(
+      return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.VerifyPage(
+        child: _i6.VerifyPage(
           key: args.key,
           phoneNumber: args.phoneNumber,
           token: args.token,
@@ -77,8 +84,8 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 
 /// generated route for
 /// [_i1.LoginPage]
-class Login extends _i6.PageRouteInfo<void> {
-  const Login({List<_i6.PageRouteInfo>? children})
+class Login extends _i7.PageRouteInfo<void> {
+  const Login({List<_i7.PageRouteInfo>? children})
       : super(
           Login.name,
           initialChildren: children,
@@ -86,16 +93,16 @@ class Login extends _i6.PageRouteInfo<void> {
 
   static const String name = 'Login';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.LoginWithPasswordPage]
-class Login_with_password extends _i6.PageRouteInfo<Login_with_passwordArgs> {
+class Login_with_password extends _i7.PageRouteInfo<Login_with_passwordArgs> {
   Login_with_password({
-    _i7.Key? key,
+    _i8.Key? key,
     required String phoneNumber,
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           Login_with_password.name,
           args: Login_with_passwordArgs(
@@ -108,8 +115,8 @@ class Login_with_password extends _i6.PageRouteInfo<Login_with_passwordArgs> {
 
   static const String name = 'Login_with_password';
 
-  static const _i6.PageInfo<Login_with_passwordArgs> page =
-      _i6.PageInfo<Login_with_passwordArgs>(name);
+  static const _i7.PageInfo<Login_with_passwordArgs> page =
+      _i7.PageInfo<Login_with_passwordArgs>(name);
 }
 
 class Login_with_passwordArgs {
@@ -118,7 +125,7 @@ class Login_with_passwordArgs {
     required this.phoneNumber,
   });
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   final String phoneNumber;
 
@@ -130,8 +137,8 @@ class Login_with_passwordArgs {
 
 /// generated route for
 /// [_i3.MainPage]
-class Main extends _i6.PageRouteInfo<void> {
-  const Main({List<_i6.PageRouteInfo>? children})
+class Main extends _i7.PageRouteInfo<void> {
+  const Main({List<_i7.PageRouteInfo>? children})
       : super(
           Main.name,
           initialChildren: children,
@@ -139,13 +146,27 @@ class Main extends _i6.PageRouteInfo<void> {
 
   static const String name = 'Main';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.SplashPage]
-class Splash extends _i6.PageRouteInfo<void> {
-  const Splash({List<_i6.PageRouteInfo>? children})
+/// [_i4.SettingPage]
+class Setting extends _i7.PageRouteInfo<void> {
+  const Setting({List<_i7.PageRouteInfo>? children})
+      : super(
+          Setting.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Setting';
+
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i5.SplashPage]
+class Splash extends _i7.PageRouteInfo<void> {
+  const Splash({List<_i7.PageRouteInfo>? children})
       : super(
           Splash.name,
           initialChildren: children,
@@ -153,18 +174,18 @@ class Splash extends _i6.PageRouteInfo<void> {
 
   static const String name = 'Splash';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.VerifyPage]
-class Verify extends _i6.PageRouteInfo<VerifyArgs> {
+/// [_i6.VerifyPage]
+class Verify extends _i7.PageRouteInfo<VerifyArgs> {
   Verify({
-    _i8.Key? key,
+    _i9.Key? key,
     required String phoneNumber,
     required String token,
     required String dateTime,
-    List<_i6.PageRouteInfo>? children,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           Verify.name,
           args: VerifyArgs(
@@ -183,7 +204,7 @@ class Verify extends _i6.PageRouteInfo<VerifyArgs> {
 
   static const String name = 'Verify';
 
-  static const _i6.PageInfo<VerifyArgs> page = _i6.PageInfo<VerifyArgs>(name);
+  static const _i7.PageInfo<VerifyArgs> page = _i7.PageInfo<VerifyArgs>(name);
 }
 
 class VerifyArgs {
@@ -194,7 +215,7 @@ class VerifyArgs {
     required this.dateTime,
   });
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   final String phoneNumber;
 

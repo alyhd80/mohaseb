@@ -28,6 +28,11 @@ class AppRouter extends $AppRouter {
       path: "/main/",
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
+    CustomRoute(
+      page:Setting.page,
+      path: "/setting/",
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
       ];
 }
 

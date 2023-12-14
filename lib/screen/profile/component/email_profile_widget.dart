@@ -1,6 +1,7 @@
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mohaseb/screen/component/custom_textfield.dart';
 import 'package:mohaseb/screen/profile/view_model/profile_view_model.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
 
@@ -11,8 +12,6 @@ class EmailProfileWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var viewModel = ref.watch(profileViewModelProvider);
-
     return Container(
       width: size.width,
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
@@ -42,15 +41,43 @@ class EmailProfileWidget extends ConsumerWidget {
                     ? 5
                     : size.width * 0.02,
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "booleannemati@gmail.com",
-              style: Theme.of(context).textTheme.headline2!.copyWith(
-                  color: titleColor1,
-                  fontSize: size.width * 0.05 > 15 ? 15 : size.width * 0.05),
-            ),
-          ),
+          Consumer(builder: (contextt, ref, widget) {
+            var viewModel = ref.watch(profileViewModelProvider);
+
+            return AnimatedSwitcher(
+              duration: Duration(milliseconds: 500),
+              switchInCurve: Curves.ease,
+              switchOutCurve: Curves.ease,
+              child: viewModel.isEditable
+                  ? Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: borderColor2),
+                ),
+
+                      padding: EdgeInsets.only(bottom: 8,top: 8,left: 5),
+                      child: CustomTextField(
+                        hintTitle: "email",
+                        fontSize: 14,
+                        textAlign: TextAlign.left,
+                        textEditingController: viewModel.emailEditingController,
+                      ),
+                    )
+                  : Container(
+                padding: EdgeInsets.only(top: 9,bottom: 9,left: 6),
+
+                alignment: Alignment.centerLeft,
+                      child: Text(
+                        "booleannemati@gmail.com",
+                        style: Theme.of(context).textTheme.headline2!.copyWith(
+                            color: titleColor1,
+                            fontSize: size.width * 0.045 > 14
+                                ? 14
+                                : size.width * 0.045),
+                      ),
+                    ),
+            );
+          }),
           SizedBox(
             height: size.height * 0.02 > 10
                 ? 10

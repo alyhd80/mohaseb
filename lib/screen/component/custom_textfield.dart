@@ -105,23 +105,31 @@ class CustomTextField extends StatelessWidget {
       ],
       style: Theme.of(context).textTheme.bodyText1!.copyWith(
           fontSize: fontSize != null
-              ? fontSize == 18
-                  ? size.width * 0.055 > 18
-                      ? 18
-                      : size.width * 0.055
-                  : (size.width * 0.06 > size.height * 0.025
-                              ? size.height * 0.025
-                              : size.width * 0.06) >
-                          16
-                      ? 16
-                      : (size.width * 0.06 > size.height * 0.025
-                                  ? size.height * 0.025
-                                  : size.width * 0.06) <
-                              14
-                          ? 14
+              ? fontSize == 14
+                  ? size.width * 0.045 > 14
+                      ? 14
+                      : size.width * 0.045
+                  : fontSize == 12
+                      ? size.width * 0.045 > 12
+                          ? 12
+                          : size.width * 0.045
+                      : fontSize == 18
+                          ? size.width * 0.055 > 18
+                              ? 18
+                              : size.width * 0.055
                           : (size.width * 0.06 > size.height * 0.025
-                              ? size.height * 0.025
-                              : size.width * 0.06)
+                                      ? size.height * 0.025
+                                      : size.width * 0.06) >
+                                  16
+                              ? 16
+                              : (size.width * 0.06 > size.height * 0.025
+                                          ? size.height * 0.025
+                                          : size.width * 0.06) <
+                                      14
+                                  ? 14
+                                  : (size.width * 0.06 > size.height * 0.025
+                                      ? size.height * 0.025
+                                      : size.width * 0.06)
               : (size.width * 0.06 > size.height * 0.025
                           ? size.height * 0.025
                           : size.width * 0.06) >
@@ -141,36 +149,44 @@ class CustomTextField extends StatelessWidget {
         hintText: hintTitle ?? " ",
         hintStyle: Theme.of(context).textTheme.headline2!.copyWith(
             fontSize: fontSize != null
-                ? fontSize == 18
-                    ? size.width * 0.055 > 18
-                        ? 18
-                        : size.width * 0.055
-                    : (size.width * 0.06 > size.height * 0.025
-                                ? size.height * 0.025
-                                : size.width * 0.06) >
-                            16
-                        ? 16
-                        : (size.width * 0.06 > size.height * 0.025
-                                    ? size.height * 0.025
-                                    : size.width * 0.06) <
-                                14
-                            ? 14
-                            : (size.width * 0.06 > size.height * 0.025
-                                ? size.height * 0.025
-                                : size.width * 0.06)
+                ? fontSize == 14
+                ? size.width * 0.045 > 14
+                ? 14
+                : size.width * 0.045
+                : fontSize == 12
+                ? size.width * 0.045 > 12
+                ? 12
+                : size.width * 0.045
+                : fontSize == 18
+                ? size.width * 0.055 > 18
+                ? 18
+                : size.width * 0.055
                 : (size.width * 0.06 > size.height * 0.025
-                            ? size.height * 0.025
-                            : size.width * 0.06) >
-                        16
-                    ? 16
-                    : (size.width * 0.06 > size.height * 0.025
-                                ? size.height * 0.025
-                                : size.width * 0.06) <
-                            14
-                        ? 14
-                        : (size.width * 0.06 > size.height * 0.025
-                            ? size.height * 0.025
-                            : size.width * 0.06),
+                ? size.height * 0.025
+                : size.width * 0.06) >
+                16
+                ? 16
+                : (size.width * 0.06 > size.height * 0.025
+                ? size.height * 0.025
+                : size.width * 0.06) <
+                14
+                ? 14
+                : (size.width * 0.06 > size.height * 0.025
+                ? size.height * 0.025
+                : size.width * 0.06)
+                : (size.width * 0.06 > size.height * 0.025
+                ? size.height * 0.025
+                : size.width * 0.06) >
+                16
+                ? 16
+                : (size.width * 0.06 > size.height * 0.025
+                ? size.height * 0.025
+                : size.width * 0.06) <
+                14
+                ? 14
+                : (size.width * 0.06 > size.height * 0.025
+                ? size.height * 0.025
+                : size.width * 0.06),
             fontWeight: FontWeight.w500,
             color: hintColor ?? greyFoundation09),
       ),

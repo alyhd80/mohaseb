@@ -8,7 +8,7 @@ import 'package:mohaseb/data/model/login_model.dart';
 import 'package:mohaseb/utils/app_constant/strings.dart';
 import 'package:mohaseb/utils/app_constant/urls.dart';
 
-part 'api_client.g.dart';
+part 'api.client.g.dart';
 
 abstract class ApiClient {
   factory ApiClient(Dio dio, AppPreferencesHelper appPreferencesHelper,

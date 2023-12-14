@@ -17,6 +17,7 @@ Color blueLight2 = const Color.fromRGBO(240, 252, 252, 1);
 
 
 Color borderColor1 = const Color.fromRGBO(155, 157, 161, 1);
+Color borderColor2 = const Color.fromRGBO(244, 245, 245, 1);
 
 Color titleColor1 = const Color.fromRGBO(131, 141, 149, 1);
 
@@ -100,6 +101,7 @@ Color grey8 = const Color.fromRGBO(244, 246, 249, 1);
 
 Color iconsDark = const Color.fromRGBO(62, 62, 60, 1);
 Color iconsDefault = const Color.fromRGBO(112, 110, 107, 1);
+
 Color iconsLight = const Color.fromRGBO(176, 173, 171, 1);
 
 
