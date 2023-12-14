@@ -67,7 +67,6 @@ abstract class $AppRouter extends _i7.RootStackRouter {
           orElse: () => VerifyArgs(
                 phoneNumber: pathParams.getString('phoneNumber'),
                 token: pathParams.getString('token'),
-                dateTime: pathParams.getString('dateTime'),
               ));
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -75,7 +74,6 @@ abstract class $AppRouter extends _i7.RootStackRouter {
           key: args.key,
           phoneNumber: args.phoneNumber,
           token: args.token,
-          dateTime: args.dateTime,
         ),
       );
     },
@@ -184,7 +182,6 @@ class Verify extends _i7.PageRouteInfo<VerifyArgs> {
     _i9.Key? key,
     required String phoneNumber,
     required String token,
-    required String dateTime,
     List<_i7.PageRouteInfo>? children,
   }) : super(
           Verify.name,
@@ -192,12 +189,10 @@ class Verify extends _i7.PageRouteInfo<VerifyArgs> {
             key: key,
             phoneNumber: phoneNumber,
             token: token,
-            dateTime: dateTime,
           ),
           rawPathParams: {
             'phoneNumber': phoneNumber,
             'token': token,
-            'dateTime': dateTime,
           },
           initialChildren: children,
         );
@@ -212,7 +207,6 @@ class VerifyArgs {
     this.key,
     required this.phoneNumber,
     required this.token,
-    required this.dateTime,
   });
 
   final _i9.Key? key;
@@ -221,10 +215,8 @@ class VerifyArgs {
 
   final String token;
 
-  final String dateTime;
-
   @override
   String toString() {
-    return 'VerifyArgs{key: $key, phoneNumber: $phoneNumber, token: $token, dateTime: $dateTime}';
+    return 'VerifyArgs{key: $key, phoneNumber: $phoneNumber, token: $token}';
   }
 }

@@ -79,7 +79,10 @@ class _ApiClient implements ApiClient {
     BaseResponseModel<LoginEndModel> value = BaseResponseModel();
 
     try {
-      final _result = await _dio.post(Urls.login, data: map);
+      final _result = await _dio.post(Urls.loginOtp, data: map);
+      print("data------------------------");
+      print(_result.data);
+
       value.data=LoginEndModel.fromJson(_result.data);
 
       value.isSuccess = true;
@@ -102,6 +105,7 @@ class _ApiClient implements ApiClient {
 
     try {
       final _result = await _dio.post(Urls.loginPassword, data: map);
+
       value.data=LoginEndModel.fromJson(_result.data);
       value.isSuccess = true;
     } on DioException catch (e) {

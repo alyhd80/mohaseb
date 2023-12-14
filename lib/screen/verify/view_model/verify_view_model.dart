@@ -38,6 +38,7 @@ class VerifyViewModel extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
+    print("token ${token}");
     final response =
         await ref.read(apiClientProvider).verifyLogin(context: context, map: {
       "signature": token,

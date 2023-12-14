@@ -58,7 +58,7 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
 
     final response = await ref
         .read(apiClientProvider)
-        .login(context: context, map: {"phone": phoneNumber, 'wants_otp': '1'});
+        .login(context: context, map: {"phone": phoneNumber, 'wants_otp': true});
 
     if (response.isSuccess) {
       showToast(
@@ -71,8 +71,7 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
       await Future.delayed(Duration(milliseconds: 500), () async {
         await context.router.push(Verify(
           phoneNumber: phoneNumber,
-          token: "response.data?.data?.otp?.signature" ?? "",
-          dateTime: "response.data?.data?.otp?.expiredAt.toString()" ?? "",
+          token:response.data?.data?.otp?.signature ?? "",
         ));
         findNavigationPage(context, ref);
       });
@@ -113,10 +112,9 @@ class LoginWithPasswordViewModel extends ChangeNotifier {
       await perf.setAccessToken(response.data!.data?.token);
       await perf.setUserLoggedInMode(1);
 
-      context.router.pushAndPopUntil(Main(),predicate: (t){
+      context.router.pushAndPopUntil(Main(), predicate: (t) {
         return false;
       });
-
     } else {
       showToast(
           context: context,

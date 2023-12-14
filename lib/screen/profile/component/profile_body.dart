@@ -25,7 +25,6 @@ class _ProfileBodyState extends ConsumerState<ProfileBody> {
         padding:  EdgeInsets.symmetric(horizontal: size.width*0.05>15?15:size.width*0.05),
         child: Column(
           children: [
-            SafeArea(child: Container()),
             SizedBox(height: size.height*0.02>10?10:size.height*0.02<5?5:size.width*0.02,),
             ProfileWrapperWidget(size: size),
             SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),

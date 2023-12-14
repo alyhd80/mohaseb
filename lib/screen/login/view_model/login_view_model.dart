@@ -94,7 +94,6 @@ class LoginViewModel extends ChangeNotifier {
           await context.router.push(Verify(
               phoneNumber: numberTextEditingController.text,
               token: response.data?.data?.otp?.signature ?? "",
-            dateTime: response.data?.data?.otp?.expiredAt.toString()??"",
           ));
 
           findNavigationPage(context, ref);

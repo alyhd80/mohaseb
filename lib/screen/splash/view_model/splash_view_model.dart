@@ -21,7 +21,7 @@ class SplashViewModel extends ChangeNotifier {
           return false;
         });
       } else {
-        context.router.pushAndPopUntil(Main(),predicate: (t){
+        context.router.pushAndPopUntil(Login(),predicate: (t){
           return false;
         });
       }

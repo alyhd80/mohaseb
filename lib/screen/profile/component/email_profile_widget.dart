@@ -21,7 +21,8 @@ class EmailProfileWidget extends ConsumerWidget {
           blurRadius: 7,
           offset: const Offset(0, 3), // changes position of shadow
         ),
-      ]),
+      ],
+      borderRadius: BorderRadius.circular(16)),
       padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.06 > 20 ? 20 : size.width * 0.06,
           vertical: size.height * 0.015 > 12 ? 12 : size.height * 0.015),
@@ -31,7 +32,7 @@ class EmailProfileWidget extends ConsumerWidget {
           Text(
             "ایمیل",
             style: Theme.of(context).textTheme.headline2!.copyWith(
-                color: titleColor1,
+                color: textColorGrey1,
                 fontSize: size.width * 0.05 > 15 ? 15 : size.width * 0.05),
           ),
           SizedBox(

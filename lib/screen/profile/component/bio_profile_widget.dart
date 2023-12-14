@@ -34,7 +34,7 @@ class BioProfileWidget extends StatelessWidget {
           Text(
             "بیو",
             style: Theme.of(context).textTheme.headline2!.copyWith(
-                color: titleColor1,
+                color: textColorGrey1,
                 fontSize: size.width * 0.05 > 15 ? 15 : size.width * 0.05),
           ),
           SizedBox(

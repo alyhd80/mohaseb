@@ -11,13 +11,13 @@ import 'package:auto_route/auto_route.dart';
 
 @RoutePage(name: "verify")
 class VerifyPage extends ConsumerStatefulWidget {
-  final String phoneNumber, token, dateTime;
+  final String phoneNumber, token;
 
   const VerifyPage(
       {super.key,
       @pathParam required this.phoneNumber,
       @pathParam required this.token,
-      @pathParam required this.dateTime});
+});
 
   @override
   ConsumerState<VerifyPage> createState() => _VerifyPageState();
