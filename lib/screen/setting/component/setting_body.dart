@@ -72,6 +72,10 @@ class SettingBody extends StatelessWidget {
                 height: size.height * 0.01 > 15 ? 15 : size.height * 0.01,
               ),
 SettingFeatureWidget(size: size, iconData: Boxicons.bx_lock, title: "بازیابی رمز عبور"),
+              SettingFeatureWidget(size: size, iconData: Icons.logout_outlined, title: "خروج از اکانت"),
+
+
+
               SizedBox(height: size.height*0.5,)
             ],
           ),

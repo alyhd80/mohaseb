@@ -194,7 +194,6 @@ class ProfileTopWidget extends ConsumerWidget {
                             child: viewModel.isEditable
                                 ? Container(
                                     padding: EdgeInsets.symmetric(vertical: 2),
-                                    margin: EdgeInsets.only(left: 8),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         border:
@@ -272,7 +271,6 @@ class ProfileTopWidget extends ConsumerWidget {
                                   ? Container(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 2),
-                                      margin: EdgeInsets.only(left: 8),
                                       decoration: BoxDecoration(
 
                                           borderRadius:

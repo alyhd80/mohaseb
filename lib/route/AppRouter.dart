@@ -33,6 +33,11 @@ class AppRouter extends $AppRouter {
       path: "/setting/",
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),
+    CustomRoute(
+      page:Change_password.page,
+      path: "/change_password/",
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
       ];
 }
 

@@ -38,7 +38,7 @@ class BottomSheetWidget extends ConsumerWidget {
                 )),
                 Expanded(
                     child: BottomNavTabWidget(
-                  iconData: Icons.add_box,
+                      iconData:viewModel.pageSelected == 2? Boxicons.bx_search_alt_2:Boxicons.bxs_search_alt_2,
                   isSelectedPage: viewModel.pageSelected == 2,
                   onTap: () {
                     viewModel.pageSelected = 2;
@@ -49,7 +49,7 @@ class BottomSheetWidget extends ConsumerWidget {
                 ),
                 Expanded(
                     child: BottomNavTabWidget(
-                  iconData: Icons.add_box,
+                      iconData:viewModel.pageSelected == 1?  Boxicons.bx_category: Boxicons.bxs_category,
                   isSelectedPage: viewModel.pageSelected == 1,
                   onTap: () {
                     viewModel.pageSelected = 1;
@@ -57,7 +57,7 @@ class BottomSheetWidget extends ConsumerWidget {
                 )),
                 Expanded(
                     child: BottomNavTabWidget(
-                  iconData: Icons.add_box,
+                  iconData:viewModel.pageSelected == 0? Boxicons.bxs_home: Boxicons.bx_home,
                   isSelectedPage: viewModel.pageSelected == 0,
                   onTap: () {
                     viewModel.pageSelected = 0;
@@ -81,7 +81,7 @@ class BottomSheetWidget extends ConsumerWidget {
               decoration:
                   BoxDecoration(color: darkBlue4, shape: BoxShape.circle),
               alignment: Alignment.center,
-              child: FittedBox(child:Icon(Icons.send,color: Colors.white,),),
+              child: FittedBox(child:Icon(Boxicons.bxs_send,color: Colors.white,),),
             ),
           ),
         ),
