@@ -21,16 +21,10 @@ class SplashViewModel extends ChangeNotifier {
           return false;
         });
       } else {
-        context.router.pushAndPopUntil(Login(),predicate: (t){
+        context.router.pushAndPopUntil(Main(),predicate: (t){
           return false;
         });
       }
-
-
-      // context.replaceRoute(Login());
-      // context.router.replace(Login());
-
-      // Navigator.pushNamedAndRemoveUntil(context, AppRout.login, (_) => false);
     });
   }
 }

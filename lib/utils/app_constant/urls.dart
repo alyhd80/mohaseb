@@ -6,11 +6,15 @@ class Urls{
   static const String apiUrl = "${baseUrl}api/v1/";
 
   static const String login = 'auth/otp';
-  static const String loginOtp = 'auth/logout';
+  static const String loginOtp = 'auth/otp/verify';
 
   static const String loginPassword = 'auth/password-login';
   static const String logOut = 'auth/logout';
 
   static const String userProfile = 'users/profile';
+  static const String resetPassword = 'users/password';
+
+
+
 
 }

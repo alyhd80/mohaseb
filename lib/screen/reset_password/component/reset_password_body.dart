@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mohaseb/screen/component/custom_buttom.dart';
 import 'package:mohaseb/screen/component/custom_textfield.dart';
 import 'package:mohaseb/screen/reset_password/view_model/reset_password_view_model.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
@@ -167,12 +168,33 @@ class ResetPasswordBody extends ConsumerWidget {
                       );
                     }),
                   ),
-                )
+                ),
+
+
               ],
             ),
           ),
         ),
-
+        SizedBox(
+          height: size.height * 0.02>20?20:size.height * 0.02,
+        ),
+        SizedBox(
+          height: size.height * 0.06,
+          width: size.width,
+          child: Consumer(builder: (context, ref, wdiget) {
+            return CustomButton(
+              backgroundColor : primaryColor,
+              isLoading: viewModel.isLoading,
+              title: "ارسال رمز جدید",
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              onTap: () {
+                if(viewModel.isLoading)return;
+                viewModel.checkValidationPassword(context: context, ref: ref);
+              },
+            );
+          }),
+        ),
       ],
     );
   }

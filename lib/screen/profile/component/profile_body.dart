@@ -26,8 +26,8 @@ class _ProfileBodyState extends ConsumerState<ProfileBody> {
         child: Column(
           children: [
             SizedBox(height: size.height*0.02>10?10:size.height*0.02<5?5:size.width*0.02,),
-            ProfileWrapperWidget(size: size),
-            SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
+            // ProfileWrapperWidget(size: size),
+            // SizedBox(height: size.height*0.06>30?30:size.height*0.06<20?20:size.width*0.06,),
             ProfileTopWidget(size: size,),
             SizedBox(height: size.height*0.03>15?15:size.height*0.03<10?10:size.width*0.03,),
             ProfileNumberWidget(size: size),

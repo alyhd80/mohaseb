@@ -5,8 +5,10 @@ import 'package:mohaseb/data/model/base_response_model.dart';
 import 'package:mohaseb/data/model/error_response_model.dart';
 import 'package:mohaseb/data/model/login_end_model.dart';
 import 'package:mohaseb/data/model/login_model.dart';
-import 'package:mohaseb/utils/app_constant/strings.dart';
+import 'package:mohaseb/data/model/user_profile_model.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
 import 'package:mohaseb/utils/app_constant/urls.dart';
+import 'package:auto_route/auto_route.dart';
 
 part 'api.client.g.dart';
 
@@ -26,9 +28,11 @@ abstract class ApiClient {
   Future<BaseResponseModel> logOut(
       {required BuildContext context});
 
-  Future<BaseResponseModel> getUserProfile(
+  Future<BaseResponseModel<UserProfileModel>> getUserProfile(
       {required BuildContext context});
 
+  Future<BaseResponseModel> setNewPassword(
+      {required BuildContext context, required Map<String,dynamic> map});
 
 
 

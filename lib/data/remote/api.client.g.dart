@@ -36,15 +36,13 @@ class _ApiClient implements ApiClient {
       BuildContext context,
       ) async {
     if (dioError.response?.statusCode == 401) {
-      // await appPreferencesHelper.userClear();
-      // await appPreferencesHelper.setUserLoggedInMode(0);
-      // _dio.options.headers.remove('Authorization');
+      await appPreferencesHelper.userClear();
+      await appPreferencesHelper.setUserLoggedInMode(0);
+      _dio.options.headers.remove('Authorization');
 
-      ///        bad dorost knm
-      // Navigator.pushNamedAndRemoveUntil(
-      //     context,
-      //     Urls.isMentor ? AppRout.loginConsultant : AppRout.login,
-      //         (route) => false);
+      context.router.pushAndPopUntil(Login(),predicate: (t){
+        return false;
+      });
     }
   }
 
@@ -74,7 +72,8 @@ class _ApiClient implements ApiClient {
     await handleToken();
 
     BaseResponseModel<LoginEndModel> value = BaseResponseModel();
-
+    print("map---------------------------");
+print(map);
     try {
       final _result = await _dio.post(Urls.loginOtp, data: map);
       print("data------------------------");
@@ -139,17 +138,16 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<BaseResponseModel> getUserProfile({required BuildContext context}) async {
+  Future<BaseResponseModel<UserProfileModel>> getUserProfile({required BuildContext context}) async {
 
 
     await handleToken();
 
-    BaseResponseModel value = BaseResponseModel();
+    BaseResponseModel<UserProfileModel> value = BaseResponseModel();
 
     try {
-      final _result = await _dio.post(Urls.userProfile);
-      print(_result.data);
-
+      final _result = await _dio.get(Urls.userProfile);
+      value.data=UserProfileModel.fromJson(_result.data);
       value.isSuccess = true;
     } on DioException catch (e) {
       if (e.response != null) {
@@ -161,6 +159,27 @@ class _ApiClient implements ApiClient {
     }
     return value;
 
+  }
+
+  @override
+  Future<BaseResponseModel> setNewPassword({required BuildContext context, required Map<String, dynamic> map}) async {
+    await handleToken();
+
+    BaseResponseModel value = BaseResponseModel();
+
+    try {
+      final _result = await _dio.post(Urls.resetPassword,data: map);
+      value.isSuccess = true;
+
+    } on DioException catch (e) {
+      if (e.response != null) {
+        value.errorResponseModel =
+            ErrorResponseModel.fromJson(e.response?.data);
+        await handleError(e, context);
+      }
+      value.isSuccess = false;
+    }
+    return value;
   }
 
 
