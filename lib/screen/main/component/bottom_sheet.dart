@@ -1,6 +1,7 @@
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mohaseb/screen/main/component/bottom_nav_tab_widget.dart';
 import 'package:mohaseb/screen/main/view_model/main_view_model.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
@@ -30,38 +31,35 @@ class BottomSheetWidget extends ConsumerWidget {
               children: [
                 Expanded(
                     child: BottomNavTabWidget(
-                  iconData:viewModel.pageSelected == 3? Boxicons.bxs_user_circle:Boxicons.bx_user_circle,
+size: size,
                   isSelectedPage: viewModel.pageSelected == 3,
                   onTap: () {
                     viewModel.pageSelected = 3;
-                  },
+                  }, urlSvg: 'assets/images/profile_bottom_nav.svg',
                 )),
                 Expanded(
-                    child: BottomNavTabWidget(
-                      iconData:viewModel.pageSelected == 2? Boxicons.bx_search_alt_2:Boxicons.bxs_search_alt_2,
+                    child: BottomNavTabWidget(size: size,
                   isSelectedPage: viewModel.pageSelected == 2,
                   onTap: () {
                     viewModel.pageSelected = 2;
-                  },
+                  }, urlSvg: 'assets/images/resume_nav_bar.svg',
                 )),
                 Expanded(
                   child: Container(),
                 ),
                 Expanded(
-                    child: BottomNavTabWidget(
-                      iconData:viewModel.pageSelected == 1?  Boxicons.bx_category: Boxicons.bxs_category,
+                    child: BottomNavTabWidget(size: size,
                   isSelectedPage: viewModel.pageSelected == 1,
                   onTap: () {
                     viewModel.pageSelected = 1;
                   },
-                )),
+                        urlSvg: 'assets/images/search_bottom_nav.svg'                )),
                 Expanded(
-                    child: BottomNavTabWidget(
-                  iconData:viewModel.pageSelected == 0? Boxicons.bxs_home: Boxicons.bx_home,
+                    child: BottomNavTabWidget(size: size,
                   isSelectedPage: viewModel.pageSelected == 0,
                   onTap: () {
                     viewModel.pageSelected = 0;
-                  },
+                  }, urlSvg: 'assets/images/home_bottom_nav.svg',
                 )),
               ],
             ),
@@ -81,7 +79,8 @@ class BottomSheetWidget extends ConsumerWidget {
               decoration:
                   BoxDecoration(color: darkBlue4, shape: BoxShape.circle),
               alignment: Alignment.center,
-              child: FittedBox(child:Icon(Boxicons.bxs_send,color: Colors.white,),),
+              child: Container(
+    height: ((size.height * 0.07 > 65 ? 65 : size.height * 0.07<45?45:size.height * 0.07) * 0.4),child: AspectRatio(aspectRatio: 1,child:SvgPicture.asset("assets/images/send_bottom_nav.svg"),)),
             ),
           ),
         ),

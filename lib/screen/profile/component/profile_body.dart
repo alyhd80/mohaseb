@@ -31,8 +31,8 @@ class _ProfileBodyState extends ConsumerState<ProfileBody> {
             ProfileTopWidget(size: size,),
             SizedBox(height: size.height*0.03>15?15:size.height*0.03<10?10:size.width*0.03,),
             ProfileNumberWidget(size: size),
-            SizedBox(height: size.height*0.03>15?15:size.height*0.03<10?10:size.width*0.03,),
-            BioProfileWidget(size: size),
+            // SizedBox(height: size.height*0.03>15?15:size.height*0.03<10?10:size.width*0.03,),
+            // BioProfileWidget(size: size),
             SizedBox(height: size.height*0.03>15?15:size.height*0.03<10?10:size.width*0.03,),
             EmailProfileWidget(size: size),
             SizedBox(height: (size.height * 0.07 > 65 ? 65 : size.height * 0.07<45?45:size.height * 0.07)*1.5,)

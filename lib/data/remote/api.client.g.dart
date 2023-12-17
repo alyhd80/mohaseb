@@ -16,11 +16,8 @@ class _ApiClient implements ApiClient {
     _dio.interceptors.add(LogInterceptor());
     _dio.options.baseUrl = baseUrl;
     _dio.options.followRedirects = true;
-    _dio.options.receiveTimeout = Duration(milliseconds: 20000);
-    _dio.options.connectTimeout = Duration(milliseconds:
-    5000
-
-    );
+    _dio.options.receiveTimeout = Duration(seconds: 60);
+    _dio.options.connectTimeout = Duration(seconds: 60);
 
     // _dio.options.headers['content-Type'] = 'application/json';
     _dio.options.headers['accept'] = 'application/json';
@@ -30,7 +27,7 @@ class _ApiClient implements ApiClient {
     _dio.options.headers.remove('Authorization');
     String? token = await appPreferencesHelper.getAccessToken();
     if (token != null && token.isNotEmpty) {
-      _dio.options.headers['Authorization'] = "JWT $token";
+      _dio.options.headers['Authorization'] = "Bearer $token";
     }
   }
 
@@ -39,9 +36,9 @@ class _ApiClient implements ApiClient {
       BuildContext context,
       ) async {
     if (dioError.response?.statusCode == 401) {
-      await appPreferencesHelper.userClear();
-      await appPreferencesHelper.setUserLoggedInMode(0);
-      _dio.options.headers.remove('Authorization');
+      // await appPreferencesHelper.userClear();
+      // await appPreferencesHelper.setUserLoggedInMode(0);
+      // _dio.options.headers.remove('Authorization');
 
       ///        bad dorost knm
       // Navigator.pushNamedAndRemoveUntil(
@@ -117,6 +114,53 @@ class _ApiClient implements ApiClient {
       value.isSuccess = false;
     }
     return value;
+  }
+
+  @override
+  Future<BaseResponseModel> logOut({required BuildContext context}) async {
+    await handleToken();
+
+    BaseResponseModel value = BaseResponseModel();
+
+    try {
+      final _result = await _dio.post(Urls.logOut);
+      print(_result.data);
+
+      value.isSuccess = true;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        value.errorResponseModel =
+            ErrorResponseModel.fromJson(e.response?.data);
+        await handleError(e, context);
+      }
+      value.isSuccess = false;
+    }
+    return value;
+  }
+
+  @override
+  Future<BaseResponseModel> getUserProfile({required BuildContext context}) async {
+
+
+    await handleToken();
+
+    BaseResponseModel value = BaseResponseModel();
+
+    try {
+      final _result = await _dio.post(Urls.userProfile);
+      print(_result.data);
+
+      value.isSuccess = true;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        value.errorResponseModel =
+            ErrorResponseModel.fromJson(e.response?.data);
+        await handleError(e, context);
+      }
+      value.isSuccess = false;
+    }
+    return value;
+
   }
 
 

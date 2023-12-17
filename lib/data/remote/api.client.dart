@@ -22,4 +22,14 @@ abstract class ApiClient {
 
   Future<BaseResponseModel<LoginEndModel>> loginPassword(
       {required BuildContext context, required Map<String,dynamic> map});
+
+  Future<BaseResponseModel> logOut(
+      {required BuildContext context});
+
+  Future<BaseResponseModel> getUserProfile(
+      {required BuildContext context});
+
+
+
+
 }

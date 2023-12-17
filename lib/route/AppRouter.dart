@@ -13,32 +13,44 @@ class AppRouter extends $AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
 // guards: [SplashGard()]
         ),
+
     CustomRoute(
       page: Verify.page,
       path: "/verify/:phoneNumber/:token/",
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
+
     CustomRoute(
       page:Login_with_password.page,
       path: "/login_with_password/",
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
+
     CustomRoute(
       page:Main.page,
       path: "/main/",
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
+
     CustomRoute(
       page:Setting.page,
       path: "/setting/",
       transitionsBuilder: TransitionsBuilders.slideLeft,
     ),
+
     CustomRoute(
       page:Change_password.page,
       path: "/change_password/",
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
-      ];
+
+    CustomRoute(
+      page:Reset_password.page,
+      path: "/reset_password/",
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
+
+  ];
 }
 
 

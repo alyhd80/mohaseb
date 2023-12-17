@@ -27,7 +27,7 @@ class ProfileTopWidget extends ConsumerWidget {
           ? 350
           : size.height * 0.35 < 280
               ? 280
-              : size.height * 0.35),
+              : size.height * 0.35)*1.1,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
@@ -61,8 +61,8 @@ class ProfileTopWidget extends ConsumerWidget {
                           ? Boxicons.bxs_message_square_check
                           : Boxicons.bxs_edit_alt,
                       color: viewModel.isEditable ? darkBlue4 : textColorGrey1,
-                      size: 20,
-                      weight: 20,
+                      size: 25,
+                      weight: 25,
                     ),
                   ),
                 ),
@@ -77,8 +77,8 @@ class ProfileTopWidget extends ConsumerWidget {
                   child: Icon(
                     Boxicons.bx_cog,
                     color: textColorGrey1,
-                    size: 20,
-                    weight: 20,
+                    size: 25,
+                    weight: 25,
                   ),
                 ),
               )
@@ -343,55 +343,62 @@ class ProfileTopWidget extends ConsumerWidget {
                           duration: Duration(milliseconds: 500),
                           switchInCurve: Curves.ease,
                           switchOutCurve: Curves.ease,
-                          child: Container(
-                            key: Key(viewModel.isEditable ? "on" : "off"),
-                            decoration: BoxDecoration(
-                                color: viewModel.isEditable
-                                    ? scaffoldColor
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                    color: viewModel.isEditable
-                                        ? borderColor2
-                                        : Colors.transparent)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                if (viewModel.isEditable) ...[
-                                  Container(
-                                    padding: EdgeInsets.only(left: 8),
-                                    child: Icon(
-                                      Boxicons.bx_calendar_alt,
-                                      color: iconsLight,
-                                      size: 15,
+                          child: GestureDetector(
+                            onTap: (){
+                              if(viewModel.isEditable){
+                                viewModel.selectDateTime(context: context);
+                              }
+                            },
+                            child: Container(
+                              key: Key(viewModel.isEditable ? "on" : "off"),
+                              decoration: BoxDecoration(
+                                  color: viewModel.isEditable
+                                      ? scaffoldColor
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                      color: viewModel.isEditable
+                                          ? borderColor2
+                                          : Colors.transparent)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  if (viewModel.isEditable) ...[
+                                    Container(
+                                      padding: EdgeInsets.only(left: 8),
+                                      child: Icon(
+                                        Boxicons.bx_calendar_alt,
+                                        color: iconsLight,
+                                        size: 15,
+                                      ),
                                     ),
-                                  ),
-                                ] else ...[
-                                  Container()
-                                ],
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      viewModel.birthData,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2!
-                                          .copyWith(
-                                              color: textColorGrey2,
-                                              fontSize: size.width * 0.055 > 18
-                                                  ? 18
-                                                  : size.width * 0.055),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
+                                  ] else ...[
+                                    Container()
                                   ],
-                                ),
-                              ],
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        viewModel.birthData,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline2!
+                                            .copyWith(
+                                                color: textColorGrey2,
+                                                fontSize: size.width * 0.055 > 18
+                                                    ? 18
+                                                    : size.width * 0.055),
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

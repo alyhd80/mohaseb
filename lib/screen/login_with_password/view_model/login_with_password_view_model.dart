@@ -8,12 +8,11 @@ import 'package:auto_route/auto_route.dart';
 
 class LoginWithPasswordViewModel extends ChangeNotifier {
   bool _changeSizeHeight = true;
-  bool _showPassword = false;
+  bool _showPassword = true;
 
   bool get showPassword => _showPassword;
 
   set showPassword(bool value) {
-    if (value == _showDownButton) return;
     _showPassword = value;
     notifyListeners();
   }

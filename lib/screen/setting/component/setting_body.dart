@@ -1,5 +1,8 @@
 import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
+import 'package:mohaseb/route/AppRouter.gr.dart';
+import 'package:mohaseb/screen/reset_password/reset_password_page.dart';
+import 'package:mohaseb/screen/setting/component/log_out_diolog.dart';
 import 'package:mohaseb/screen/setting/component/setting_feature_widget.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
 import 'package:auto_route/auto_route.dart';
@@ -47,7 +50,7 @@ class SettingBody extends StatelessWidget {
                           decoration: BoxDecoration(color: Colors.transparent),
                           child: Icon(
                             Boxicons.bx_arrow_back,
-                            size: 20,
+                            size: 25,
                             color: titleColor1,
                           ))),
                   Text(
@@ -56,7 +59,7 @@ class SettingBody extends StatelessWidget {
                         color: darkBlue4,
                         fontWeight: FontWeight.w500,
                         fontSize:
-                            size.width * 0.035 > 13 ? 13 : size.width * 0.035),
+                            size.width * 0.04 > 14 ? 14 : size.width * 0.04),
                   ),
                 ],
               ),
@@ -71,8 +74,17 @@ class SettingBody extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.01 > 15 ? 15 : size.height * 0.01,
               ),
-SettingFeatureWidget(size: size, iconData: Boxicons.bx_lock, title: "بازیابی رمز عبور"),
-              SettingFeatureWidget(size: size, iconData: Icons.logout_outlined, title: "خروج از اکانت"),
+              SettingFeatureWidget(size: size, iconData: Boxicons.bx_lock, title: "بازیابی رمز عبور",onTap: (){
+                context.router.push(Reset_password());
+              },),
+
+              SettingFeatureWidget(onTap: (){
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ShowDialogLogOut(size: size);
+                    });
+              },size: size, iconData: Icons.logout_outlined, title: "خروج از اکانت"),
 
 
 

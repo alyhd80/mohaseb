@@ -132,8 +132,8 @@ if(string.length<8){
                             ),
                             GestureDetector(
                               onTap: () {
-                                if (viewModel.showPassword==
-                                    true) {
+
+                                if (viewModel.showPassword) {
                                   viewModel.showPassword = false;
                                 } else {
                                   viewModel.showPassword  = true;

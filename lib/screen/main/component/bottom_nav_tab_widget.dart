@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mohaseb/utils/app_constant/colors.dart';
 
 class BottomNavTabWidget extends StatelessWidget {
   final VoidCallback? onTap;
-  final IconData iconData;
+  final String urlSvg;
   final bool isSelectedPage;
+  final Size size;
 
   const BottomNavTabWidget(
       {super.key,
       this.onTap,
-      required this.iconData,
-      required this.isSelectedPage});
+      required this.isSelectedPage,
+      required this.urlSvg,
+      required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +23,20 @@ class BottomNavTabWidget extends StatelessWidget {
         duration: Duration(milliseconds: 500),
         switchOutCurve: Curves.ease,
         switchInCurve: Curves.ease,
-        
         child: Container(
-          key: Key(isSelectedPage?"true":"false"),
+          height: (size.height * 0.07 > 65
+                  ? 65
+                  : size.height * 0.07 < 45
+                      ? 45
+                      : size.height * 0.07) /
+              2.2,
+          key: Key(isSelectedPage ? "true" : "false"),
           color: Colors.transparent,
           alignment: Alignment.center,
-          child: FittedBox(
-            child: Icon(
-              iconData,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: SvgPicture.asset(
+              urlSvg,
               color: isSelectedPage ? darkBlue4 : iconBasicColor,
             ),
           ),

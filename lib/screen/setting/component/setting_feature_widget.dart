@@ -29,12 +29,12 @@ class SettingFeatureWidget extends StatelessWidget {
               .copyWith(
               color: textColorGrey1,
               fontWeight: FontWeight.w500,
-              fontSize: size.width * 0.035 > 13
-                  ? 13
-                  : size.width * 0.035)),
+              fontSize: size.width * 0.04 > 14
+                  ? 14
+                  : size.width * 0.04)),
             SizedBox(width: size.width*0.03>10?10:size.width*0.03,),
 
-            Icon(iconData,color: Colors.black,size: 20,),
+            Icon(iconData,color: Colors.black,size: 25,),
 
 
           ],
